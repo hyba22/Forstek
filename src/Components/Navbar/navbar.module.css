@@ -1,0 +1,56 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+    height: 75px;
+    width: 100%;
+}
+
+.title {
+    margin-left: 3rem;
+    color: #6600ff;
+}
+
+.menu {
+    display: flex;
+}
+
+.menuItem {
+    text-decoration: none;
+    color: black;
+    margin: 0.75rem;
+    font-size: 20px;
+}
+
+.buttons {
+    margin: 2%;
+}
+
+.btnSign {
+    margin: 1rem;
+    width: 75px;
+    height: 35px;
+    border: 1px solid;
+    border-radius: 10px;
+    background-color: #6600ff;
+    color:white;
+}
+
+.btnSign:hover {
+    background: rgb(144, 35, 227);
+}
+
+.btnLog {
+    width: 75px;
+    height: 35px;
+    border: 1px solid;
+    border-radius: 10px;
+    background-color: transparent;
+}
+
+.btnLog:hover {
+    background: rgb(144, 35, 227);
+    color: white;
+}
