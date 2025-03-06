@@ -27,10 +27,9 @@ export class UsersService {
     throw new NotFoundException('Could not find the user');
   }
 
-  async createUser(createUserDto: CreateUserDto) {
-    const newUser =  this.usersRepository.create(createUserDto);
-    let u = await this.usersRepository.save(newUser);
-    return u;
+  async createUser(createUserDto: CreateUserDto): Promise<User> {
+    const newUser = this.usersRepository.create(createUserDto);
+    return await this.usersRepository.save(newUser);
   }
 
   async deleteById(id: number) {
