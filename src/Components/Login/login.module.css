@@ -36,6 +36,7 @@
 
 .textfield{
     margin-top: 6px !important;
+    width: 250px;
 }
 
 .submitButton {
@@ -56,9 +57,10 @@
     border-radius: 5px;
     cursor: pointer;
     width: 75px !important;
+    margin-left: 1.5rem !important;
 }
 
 .btns{
     display: flex;
     justify-content: space-around;
-}
+} 

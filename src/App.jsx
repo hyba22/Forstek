@@ -26,15 +26,9 @@ function App() {
     <Router>
       <Navbar onLoginClick={openLoginModal} onSignUpClick={openSignUpModal} />
       <SignUpModal isOpen={isSignUpModalOpen} onClose={closeSignUpModal} />
+      <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
       <Routes>
-        {/* Home Page */}
-        <Route path="/" element={<Accueil />} />
-
-        {/* Modals */}
-        <Route
-          path="/login"
-          element={<LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />}
-        />
+        <Route path="/" element={<Accueil />} />      
         <Route path="/investisseur" element={<FormulaireInvestisseur />} />
         <Route path="/porteur-de-projet" element={<FormulairePorteurDeProjet />} />
         <Route path="/stagiaire" element={<FormulaireStagiaire />} />
