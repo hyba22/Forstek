@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./signup.module.css";
 import FormControl from "@mui/joy/FormControl";
 import Radio from "@mui/joy/Radio";
@@ -7,9 +8,36 @@ import Button from "@mui/joy/Button";
 
 const SignUpModal = ({ isOpen, onClose }) => {
   const [selectedValue, setSelectedValue] = useState("Porteur de projet");
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
+  };
+
+  const handleSignUp = () => {
+    // Close the modal
+    onClose();
+
+    // Navigate to the appropriate route based on the selected role
+    switch (selectedValue) {
+      case "Porteur de projet":
+        navigate("/porteur-de-projet");
+        break;
+      case "Investisseur":
+        navigate("/investisseur");
+        break;
+      case "Stagiaire":
+        navigate("/stagiaire");
+        break;
+      case "Startup":
+        navigate("/startup");
+        break;
+      case "Partenaire":
+        navigate("/partenaire");
+        break;
+      default:
+        break;
+    }
   };
 
   if (!isOpen) return null;
@@ -46,12 +74,14 @@ const SignUpModal = ({ isOpen, onClose }) => {
             </div>
           </RadioGroup>
         </FormControl>
+
         <div className={styles.btns}>
           <Button
             variant="outlined"
             type="submit"
             color="primary"
             className={styles.submitButton}
+            onClick={handleSignUp}
           >
             S'inscrire
           </Button>

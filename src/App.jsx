@@ -1,9 +1,16 @@
 import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Accueil from './Components/Accueil/Accueil';
 import LoginModal from './Components/Login/LoginModal';
 import Navbar from './Components/Navbar/Navbar';
-import InvestisseurLog from "./Components/Investisseur/InvestisseurLog";
 import SignUpModal from "./Components/Sign up/SignUpModal";
+import FormulaireInvestisseur from "./Components/Investisseur/FormulaireInvestisseur";
+import FormulairePorteurDeProjet from "./Components/Porteur/FormulairePorteurDeProjet";
+import FormulaireStagiaire from "./Components/FormulaireStagiaire/FormulaireStagiaire";
+import FormulaireStartup from "./Components/FormulaireStartup/FormulaireStartup";
+import FormulairePartenaire from "./Components/FormulairePartenaire/FormulairePartenaire";
+import Contact from "./Components/contact/Contact";
+
 
 function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -16,13 +23,26 @@ function App() {
   const closeSignUpModal = () => setIsSignUpModalOpen(false);
 
   return (
-    <>
+    <Router>
       <Navbar onLoginClick={openLoginModal} onSignUpClick={openSignUpModal} />
-      <Accueil />
-      <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
       <SignUpModal isOpen={isSignUpModalOpen} onClose={closeSignUpModal} />
-      <InvestisseurLog/>
-    </>
+      <Routes>
+        {/* Home Page */}
+        <Route path="/" element={<Accueil />} />
+
+        {/* Modals */}
+        <Route
+          path="/login"
+          element={<LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />}
+        />
+        <Route path="/investisseur" element={<FormulaireInvestisseur />} />
+        <Route path="/porteur-de-projet" element={<FormulairePorteurDeProjet />} />
+        <Route path="/stagiaire" element={<FormulaireStagiaire />} />
+        <Route path="/startup" element={<FormulaireStartup />} />
+        <Route path="/partenaire" element={<FormulairePartenaire />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </Router>
   );
 }
 
