@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { CgWebsite } from "react-icons/cg";
 import { FaFacebook, FaGoogle, FaLinkedin, FaLock, FaTwitter, FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import "./FormuliarePartenaire.css";
+import "./FormulairePartenaire.css";
 import { getUsers, signUp, signIn } from '../../Services/userService';
 const FormulairePartenaire = () => {
   const [isSignUpMode, setIsSignUpMode] = useState(false);

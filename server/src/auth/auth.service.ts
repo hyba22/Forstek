@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { 
+  Injectable, 
+  UnauthorizedException, 
+  ConflictException 
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcryptjs';
@@ -6,6 +10,7 @@ import User from 'src/users/user.entity';
 import { Repository } from 'typeorm';
 import { LoginDto } from './dto/login.dto';
 import { SignUpDto } from './dto/signup.dto';
+import { Role } from '../users/dto/user.dto';
 
 @Injectable()
 export class AuthService {
@@ -18,31 +23,66 @@ export class AuthService {
   async signUp(signUpDto: SignUpDto): Promise<{ token: string }> {
     console.log('Starting signUp process with DTO:', signUpDto);
     try {
-      const { name, email, password } = signUpDto;
+      const {
+        name,
+        email,
+        password,
+        prenom,
+        siteUrl,
+        telephone,
+        domaine,
+        competences,
+        nomSociete,
+        adressePostale,
+        dateCreation,
+        role = Role.UTILISATEUR 
+      } = signUpDto;
+  
+      
+      const existingUser = await this.usersRepository.findOne({ where: { email } });
+      if (existingUser) {
+        throw new ConflictException('Email already exists');
+      }
 
       console.log('Hashing password for email:', email);
       const hashedPassword = await bcrypt.hash(password, 10);
       console.log('Password hashed successfully');
-
-      console.log('Creating user entity with:', { name, email, password: 'hashed' });
+  
+      console.log('Creating user entity with provided data');
       const user = this.usersRepository.create({
         name,
         email,
         password: hashedPassword,
+        prenom,
+        siteUrl,
+        telephone,
+        domaine,
+        competences,
+        nomSociete,
+        adressePostale,
+        dateCreation: dateCreation || new Date(), 
+        role
       });
-
+  
       console.log('Saving user to database...');
       await this.usersRepository.save(user);
       console.log('User saved successfully:', user);
-
+  
       console.log('Generating JWT token for user ID:', user.id);
-      const token = this.jwtService.sign({ id: user.id });
+      const token = this.jwtService.sign({ 
+        id: user.id,
+        email: user.email,
+        role: user.role
+      });
       console.log('Token generated:', token);
-
+  
       return { token };
     } catch (error) {
       console.error('Error in signUp:', error.message || error);
-      throw error;
+      if (error instanceof ConflictException) {
+        throw error; // Re-throw specific exceptions
+      }
+      throw new ConflictException('Registration failed');
     }
   }
 
@@ -71,13 +111,17 @@ export class AuthService {
       }
 
       console.log('Password matched, generating JWT token for user ID:', user.id);
-      const token = this.jwtService.sign({ id: user.id });
+      const token = this.jwtService.sign({ 
+        id: user.id,
+        email: user.email,
+        role: user.role 
+      });
       console.log('Token generated:', token);
 
       return { token };
     } catch (error) {
       console.error('Error in login:', error.message || error);
-      throw error;
+      throw new UnauthorizedException('Login failed');
     }
   }
 }
