@@ -4,12 +4,14 @@ import Accueil from './Components/Accueil/Accueil';
 import LoginModal from './Components/Login/LoginModal';
 import Navbar from './Components/Navbar/Navbar';
 import SignUpModal from "./Components/Sign up/SignUpModal";
-import FormulaireInvestisseur from "./Components/Investisseur/FormulaireInvestisseur";
-import FormulairePorteurDeProjet from "./Components/Porteur/FormulairePorteurDeProjet";
-import FormulaireStagiaire from "./Components/FormulaireStagiaire/FormulaireStagiaire";
-import FormulaireStartup from "./Components/FormulaireStartup/FormulaireStartup";
-import FormulairePartenaire from "./Components/FormulairePartenaire/FormulairePartenaire";
+import FormulaireInvestisseur from "./Components/Formulaires/Investisseur/FormulaireInvestisseur";
+import FormulairePorteurDeProjet from "./Components/Formulaires/Porteur/FormulairePorteurDeProjet";
+import FormulaireStagiaire from "./Components/Formulaires/FormulaireStagiaire/FormulaireStagiaire";
+import FormulaireStartup from "./Components/Formulaires/FormulaireStartup/FormulaireStartup";
+import FormulairePartenaire from "./Components/Formulaires/FormulairePartenaire/FormulairePartenaire";
 import Contact from "./Components/contact/Contact";
+import FreelanceFormulaire from "./Components/Formulaires/Freelance/FreelanceFormulaire";
+import FooterPage from "./Components/Footer/FooterPage";
 
 
 function App() {
@@ -28,14 +30,16 @@ function App() {
       <SignUpModal isOpen={isSignUpModalOpen} onClose={closeSignUpModal} />
       <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
       <Routes>
-        <Route path="/" element={<Accueil />} />      
+       <Route path="/" element={<Accueil />} />  
         <Route path="/investisseur" element={<FormulaireInvestisseur />} />
         <Route path="/porteur-de-projet" element={<FormulairePorteurDeProjet />} />
         <Route path="/stagiaire" element={<FormulaireStagiaire />} />
         <Route path="/startup" element={<FormulaireStartup />} />
         <Route path="/partenaire" element={<FormulairePartenaire />} />
+        <Route path="/freelance" element={<FreelanceFormulaire />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
+      <FooterPage/>
     </Router>
   );
 }

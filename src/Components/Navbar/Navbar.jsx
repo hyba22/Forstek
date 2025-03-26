@@ -8,7 +8,7 @@ const Navbar = ({ onLoginClick, onSignUpClick }) => {
   return (
     <div className={styles.container}>
       <a className={styles.title} href="/">
-        Forstek
+        <img className={styles.logo} src='/src/assets/logo3 copy.png' />
       </a>
       <div className={styles.menu}>
         <IoMenu

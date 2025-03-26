@@ -16,6 +16,12 @@
   text-decoration: none;
 }
 
+.logo {
+  width: 250px;
+  margin: 1rem;
+  margin-top: 2rem;
+}
+
 .menu {
   display: flex;
   align-items: center;
@@ -42,6 +48,7 @@
   border-radius: 10px;
   background-color: #4481eb;
   color: white;
+  font-size: 17px;
 }
 
 .btnSign:hover {
@@ -55,6 +62,7 @@
   border-radius: 10px;
   background-color: transparent;
   margin-right: 2rem;
+  font-size: 17px;
 }
 
 .btnLog:hover {
@@ -102,7 +110,7 @@
     position: absolute;
     top: 65px;
     right: 0;
-    z-index: 3;
+    z-index: 10;
   }
 
   .menuOpen {
@@ -117,7 +125,7 @@
   .buttons {
     display: flex;
     flex-direction: column;
-    gap : 10px;
+    gap: 10px;
   }
 
   .menuItems .btnSign,

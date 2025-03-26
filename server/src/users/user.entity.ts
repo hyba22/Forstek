@@ -18,12 +18,6 @@ class User {
   @Column({ nullable: true })
   password: string;
 
-  @Column({
-    type: 'enum',
-    enum: Role,
-    default: Role.UTILISATEUR,
-  })
-  role: Role;
 
   @Column({ nullable: true })
   siteUrl: string;
@@ -35,6 +29,9 @@ class User {
   domaine: string;
 
   @Column({ nullable: true })
+  competences: string;
+
+  @Column({ nullable: true })
   nomSociete: string;
 
   @Column({ nullable: true })
@@ -42,6 +39,13 @@ class User {
 
   @Column({ nullable: true })
   dateCreation: Date;
+  
+  @Column({
+    type: 'enum',
+    enum: Role,
+    default: Role.UTILISATEUR,
+  })
+  role: Role;
 }
 
 export default User;

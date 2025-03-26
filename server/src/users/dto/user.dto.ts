@@ -1,4 +1,4 @@
-import { IsEmail, IsIn, IsNotEmpty, MinLength } from 'class-validator';
+import { IsEmail, IsIn, IsNotEmpty, MinLength, IsOptional } from 'class-validator';
 
 export enum Role {
   ADMIN = 'admin',
@@ -12,21 +12,40 @@ export enum Role {
   FREELANCE = 'freelance',
 }
 
-
 export class CreateUserDto {
-  @IsNotEmpty()
-  name: string;
+  @IsOptional()
+  name?: string;
 
-  @IsNotEmpty()
   @IsEmail()
   email: string;
 
-  @IsNotEmpty()
   @MinLength(6)
   password: string;
+  @IsOptional()
+  prenom?: string;
+  
+  @IsOptional()
+  siteUrl?: string;
 
+  @IsOptional()
+  telephone?: string;
+
+  @IsOptional()
+  domaine?: string;
+
+  @IsOptional()
+  nomSociete?: string;
+
+  @IsOptional()
+  adressePostale?: string;
+
+  @IsOptional()
+  dateCreation?: Date;
+  @IsOptional()
+  competences?: string;
+  
   @IsNotEmpty()
-  @IsIn( [
+  @IsIn([
     Role.ADMIN,
     Role.PORTEUR_DE_PROJET,
     Role.STARTUP,
@@ -36,8 +55,8 @@ export class CreateUserDto {
     Role.INVESTISSEUR,
     Role.VISITEUR,
     Role.FREELANCE
-  ],
-  { message: 'Rôle invalide. Choisissez un rôle valide.' }
-)
-role: Role;
+  ], { message: 'Rôle invalide. Choisissez un rôle valide.' })
+  role: Role;
+
+
 }

@@ -35,6 +35,9 @@ const SignUpModal = ({ isOpen, onClose }) => {
       case "Partenaire":
         navigate("/partenaire");
         break;
+      case "Freelance":
+        navigate("/freelance");
+        break;
       default:
         break;
     }
@@ -71,6 +74,10 @@ const SignUpModal = ({ isOpen, onClose }) => {
             <div className={styles.roleOption}>
               <Radio value="Partenaire" variant="outlined" />
               <label>Partenaire</label>
+            </div>
+            <div className={styles.roleOption}>
+              <Radio value="Freelance" variant="outlined" />
+              <label>Freelance</label>
             </div>
           </RadioGroup>
         </FormControl>
