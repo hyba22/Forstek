@@ -9,35 +9,35 @@ const Accueil = () => {
         <Carousel.Item className={styles.carouselItem}>
           <img
             className={`d-block w-100 ${styles.carouselImage}`}
-            src="/src/assets/logo3 copy.png"
+            src="/src/assets/idea2.png"
             alt="First slide"
           />
           <Carousel.Caption className={styles.carouselCaption}>
-            <h5>First slide label</h5>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            <h5>Partagez vos idées</h5>
+            <p>Nous vous offrons la possibilté d'analyser etd'étudier vos idées afin de les rendre réelles.</p>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item className={styles.carouselItem}>
           <img
             className={`d-block w-100 ${styles.carouselImage}`}
-            src="/src/assets/logo2.png"
+            src="/src/assets/equipe1.png"
             alt="Second slide"
           />
           <Carousel.Caption className={styles.carouselCaption}>
-            <h5>Second slide label</h5>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <h5>Nos équipes</h5>
+            <p>Nous vous mettons en relations avec des investisseurs, startup et des partenaires pour grandir vos projets.</p>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item className={styles.carouselItem}>
           <img
             className={`d-block w-100 ${styles.carouselImage}`}
-            src="/src/assets/logo1.png"
+            src="/src/assets/internships realistic2.png"
             alt="Third slide"
           />
           <Carousel.Caption className={styles.carouselCaption}>
-            <h5>Third slide label</h5>
+            <h5>Nos offres et stages</h5>
             <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+              Nous vous aidons à trouver un stage pour améliorer et acquérir des nouvelles compétences.
             </p>
           </Carousel.Caption>
         </Carousel.Item>
