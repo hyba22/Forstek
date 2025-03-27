@@ -12,6 +12,7 @@ import FormulairePartenaire from "./Components/Formulaires/FormulairePartenaire/
 import Contact from "./Components/contact/Contact";
 import FreelanceFormulaire from "./Components/Formulaires/Freelance/FreelanceFormulaire";
 import FooterPage from "./Components/Footer/FooterPage";
+import StartupProfile from "./Components/Profiles/Startup/StartupProfile";
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
         <Route path="/partenaire" element={<FormulairePartenaire />} />
         <Route path="/freelance" element={<FreelanceFormulaire />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/startupprofile" element={<StartupProfile />} />
       </Routes>
       <FooterPage/>
     </Router>
