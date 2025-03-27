@@ -14,7 +14,7 @@ const Accueil = () => {
           />
           <Carousel.Caption className={styles.carouselCaption}>
             <h5>Partagez vos idées</h5>
-            <p>Nous vous offrons la possibilté d'analyser etd'étudier vos idées afin de les rendre réelles.</p>
+            <p>Nous vous offrons la possibilté d'analyser et d'étudier vos idées afin de les rendre réelles.</p>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item className={styles.carouselItem}>
@@ -31,7 +31,7 @@ const Accueil = () => {
         <Carousel.Item className={styles.carouselItem}>
           <img
             className={`d-block w-100 ${styles.carouselImage}`}
-            src="/src/assets/internships realistic2.png"
+            src="/src/assets/internships realistic 2.png"
             alt="Third slide"
           />
           <Carousel.Caption className={styles.carouselCaption}>
