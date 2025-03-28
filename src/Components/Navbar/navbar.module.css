@@ -1,0 +1,137 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  height: 75px;
+  width: 100%;
+}
+
+.title {
+  margin-left: 3rem;
+  color: #4481eb;
+  font-size: 30px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.logo {
+  width: 250px;
+  margin: 1rem;
+  margin-top: 2rem;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.menuItem {
+  text-decoration: none;
+  color: black;
+  margin: 0.75rem;
+  font-size: 20px;
+  margin-top: 2rem;
+}
+
+.buttons {
+  display: flex;
+}
+
+.btnSign {
+  margin-right: 1.5rem;
+  width: 100px;
+  height: 35px;
+  border: 1px solid;
+  border-radius: 10px;
+  background-color: #4481eb;
+  color: white;
+  font-size: 17px;
+}
+
+.btnSign:hover {
+  background: linear-gradient(-45deg, #4481eb, #04befe);
+}
+
+.btnLog {
+  width: 100px;
+  height: 35px;
+  border: 1px solid;
+  border-radius: 10px;
+  background-color: transparent;
+  margin-right: 2rem;
+  font-size: 17px;
+}
+
+.btnLog:hover {
+  background: linear-gradient(-45deg, #4481eb, #04befe);
+  color: white;
+}
+
+.menuItems {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  text-decoration: none;
+}
+
+.menuItems a {
+  font-size: 20px;
+  color: var(--color-text);
+  text-decoration: none;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.menuBtn {
+  width: 3rem;
+  height: auto;
+  color: #4481eb;
+  margin-top: 0;
+  cursor: pointer;
+  display: none;
+  margin-right: 1rem;
+}
+
+@media screen and (max-width: 830px) {
+  .menuItems {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    border-radius: 10px;
+    background: rgb(70, 111, 187);
+    background: linear-gradient(0deg,
+        rgba(25, 55, 109, 0.2) 0%,
+        rgb(70, 111, 187));
+    padding: 15px 20px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
+    position: absolute;
+    top: 65px;
+    right: 0;
+    z-index: 10;
+  }
+
+  .menuOpen {
+    display: flex;
+    margin-right: 1.3rem;
+  }
+
+  .menuBtn {
+    display: block;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .menuItems .btnSign,
+  .menuItems .btnLog {
+    width: 100px;
+    margin: 0.5rem 0;
+    text-align: center;
+  }
+}
