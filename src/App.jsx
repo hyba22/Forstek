@@ -13,6 +13,8 @@ import Contact from "./Components/contact/Contact";
 import FreelanceFormulaire from "./Components/Formulaires/Freelance/FreelanceFormulaire";
 import FooterPage from "./Components/Footer/FooterPage";
 import StartupProfile from "./Components/Profiles/Startup/StartupProfile";
+import StartupOffres from "./Components/Profiles/Startup/SideBarStartup/Pages/StartupOffres";
+import EvaluationProjets from "./Components/Profiles/Startup/SideBarStartup/Pages/EvaluationProjets";
 
 
 function App() {
@@ -40,8 +42,10 @@ function App() {
         <Route path="/freelance" element={<FreelanceFormulaire />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/startupprofile" element={<StartupProfile />} />
+        <Route path="/startupOffres" element={<StartupOffres />} />
+        <Route path="/startupEvaluation" element={<EvaluationProjets />} />
       </Routes>
-      <FooterPage/>
+     {/**  <FooterPage/> */}
     </Router>
   );
 }

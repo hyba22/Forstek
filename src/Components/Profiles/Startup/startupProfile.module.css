@@ -1,9 +1,7 @@
 .container{
-    background-color: blueviolet;
     width: 100%;
     height: 100%;
     padding: 0.5rem;
-    
 }
 
 .subContainer{
@@ -12,13 +10,16 @@
 
 .sideBar{
     margin: 1rem;
-    background-color: aqua;
+    background-color: rgb(255, 255, 255);
     margin: 0;
     padding: 0;
+    position: relative;
+    width: 310px;
 }
 
 .body{
-    background: #908989;
+    background: #eceaea;
     width: 100%;
-
+    height: 100vh;
 }
+
