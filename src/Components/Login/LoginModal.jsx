@@ -12,11 +12,9 @@ const LoginModal = ({ isOpen, onClose }) => {
         <h2>Login</h2>
         <form onSubmit={(e) => e.preventDefault()}>
           <div className={styles.formGroup}>
-            <label className={styles.label} htmlFor="username">Email</label>
             <TextField className={styles.textfield} id="outlined-basic" label="Email" variant="outlined" />
           </div>
           <div className={styles.formGroup}>
-            <label htmlFor="password">Password</label>
             <TextField className={styles.textfield} id="outlined-password-input" type="password" label="Password" variant="outlined" />
           </div>
           <div className={styles.btns}>

@@ -11,7 +11,7 @@ const Navbar = ({ onLoginClick, onSignUpClick }) => {
         <img className={styles.logo} src='/src/assets/logo3 copy.png' />
       </a>
       <div className={styles.menu}>
-        <IoMenu
+        <IoMenu 
           className={styles.menuBtn}
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Menu"

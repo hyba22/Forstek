@@ -5,6 +5,8 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import User from './users/user.entity';
 import { UsersModule } from './users/users.module';
+import { OffresModule } from './offres/offres.module';
+import { OffreController } from './offres/offre.controller';
 
 @Module({
   imports: [
@@ -20,9 +22,10 @@ import { UsersModule } from './users/users.module';
       synchronize:true,
     }),
     AuthModule,
-    UsersModule, 
+    UsersModule,
+    OffresModule, 
   ],
-  controllers: [AppController],
+  controllers: [AppController, OffreController],
   providers: [AppService],
 })
 export class AppModule {}

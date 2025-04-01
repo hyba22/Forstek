@@ -6,14 +6,12 @@
   padding: 0;
   height: 75px;
   width: 100%;
+  border-bottom: 1px solid #4481eb;
+
 }
 
 .title {
   margin-left: 3rem;
-  color: #4481eb;
-  font-size: 30px;
-  font-weight: 600;
-  text-decoration: none;
 }
 
 .logo {
@@ -49,7 +47,7 @@
   background-color: #4481eb;
   color: white;
   font-size: 17px;
-}
+} 
 
 .btnSign:hover {
   background: linear-gradient(-45deg, #4481eb, #04befe);
