@@ -25,7 +25,7 @@ import { OffreController } from './offres/offre.controller';
     UsersModule,
     OffresModule, 
   ],
-  controllers: [AppController, OffreController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
