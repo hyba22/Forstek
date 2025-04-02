@@ -26,7 +26,7 @@ const SideBarStartup = () => {
         <img src="/src/assets/hiba.jpg" alt="profile" className={styles.profileImage}/>
         <div className={styles.profileContents}>
           <p className={styles.name}>Hello, John</p>
-          <p className={styles.email}>johnsmith@gmail.com</p>
+          <p className={styles.email}>bouslahihiba55@gmail.com</p>
         </div>
       </div>
 

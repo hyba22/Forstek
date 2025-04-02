@@ -1,7 +1,12 @@
+.globalContainer{
+  display: flex;
+  flex-direction: column;
+}
+
 .jobFormContainer {
     margin: 0 auto;
     padding: 20px;
-    max-width: 700px;
+    width: 60%;
     height: 100%;
     background: #f1f7fd;
     border-radius: 8px;
@@ -72,6 +77,106 @@
     justify-content: center;
    
   }
+
+  .formActions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.submitBtn {
+  background-color: #4caf50;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submitBtn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.cancelBtn {
+  background-color: #f44336;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cancelBtn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.offersList {
+  margin-top: 2rem;
+  width: 100%;
+  height: 100%;
+  
+
+}
+
+.offerItem {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.offerInfo {
+  flex: 1;
+}
+
+.offerActions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+
+.editBtn {
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.editBtn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.deleteBtn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.deleteBtn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.error {
+  border: 1px solid #f44336;
+}
+
+.errorMessage {
+  color: #f44336;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+  display: block;
+}
   
   .submitBtn:hover {
     background-color: #6c8ed6;

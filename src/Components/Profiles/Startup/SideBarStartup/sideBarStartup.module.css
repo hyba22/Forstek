@@ -3,7 +3,7 @@
     position: absolute;
     left: 0;
     padding: 2rem 1.5rem;
-    width: 16rem;
+    width: 16.5rem;
     height: 100vh;
     transition: all 0.3s ease;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
@@ -44,8 +44,8 @@
 
 .burgerContainer {
     position: absolute;
-    right: -1rem;
-    top: 3.5rem;
+    right: -0.65rem;
+    top: 4.5rem;
     width: 2rem;
     height: 2rem;
     background: #5995fd;

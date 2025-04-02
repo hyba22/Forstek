@@ -6,7 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import User from './users/user.entity';
 import { UsersModule } from './users/users.module';
 import { OffresModule } from './offres/offres.module';
-import { OffreController } from './offres/offre.controller';
+import { Offre } from './offres/offre.entity';
 
 @Module({
   imports: [
@@ -17,7 +17,7 @@ import { OffreController } from './offres/offre.controller';
       username: 'root',
       password: 'root',
       database: 'forstek',
-      entities: [User],
+      entities: [User, Offre],
       autoLoadEntities: true,
       synchronize:true,
     }),

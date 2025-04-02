@@ -21,7 +21,7 @@ const FormulaireStartup = () => {
     }); 
     const [error, setError] = useState("");
   
-    useEffect(() => {
+    useEffect(() => { 
       fetchUsers();
     }, []);
   
