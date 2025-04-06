@@ -35,7 +35,7 @@ export class AuthService {
         nomSociete,
         adressePostale,
         dateCreation,
-        role = Role.UTILISATEUR 
+        role ,
       } = signUpDto;
   
       
@@ -80,7 +80,7 @@ export class AuthService {
     } catch (error) {
       console.error('Error in signUp:', error.message || error);
       if (error instanceof ConflictException) {
-        throw error; // Re-throw specific exceptions
+        throw error; 
       }
       throw new ConflictException('Registration failed');
     }

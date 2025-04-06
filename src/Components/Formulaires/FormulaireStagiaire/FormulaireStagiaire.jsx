@@ -13,7 +13,7 @@ const FormulaireStagiaire = () => {
     name: "",
     prenom: "",
     domaine: "",
-  }); 
+  });
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const FormulaireStagiaire = () => {
 
   const fetchUsers = async () => {
     try {
-      const users = await getUsers(); 
+      const users = await getUsers();
       setUsers(users);
     } catch (error) {
       console.error("Failed to fetch users:", error);
@@ -43,14 +43,25 @@ const FormulaireStagiaire = () => {
         prenom: formData.prenom,
         domaine: formData.domaine,
         email: formData.email,
-        password: formData.password
+        password: formData.password,
+        role: 'stagiaire', 
       });
-      
+      localStorage.setItem("token", response.token);
+      console.log("Signup successful:", response);
+      alert(`Inscription réussie, ${formData.name}!`);
+      setFormData({
+        email: "",
+        password: "",
+        name: "",
+        prenom: "",
+        domaine: "",
+      });
+      navigate("/stagiaire-profile");
     } catch (error) {
       console.error("Signup error:", error.response?.data || error.message);
       setError(error.response?.data?.message || "Signup failed");
     }
-  }
+  };
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -59,19 +70,21 @@ const FormulaireStagiaire = () => {
         email: formData.email,
         password: formData.password,
       };
-      const response = await signIn(credentials); 
+      const response = await signIn(credentials);
+      localStorage.setItem("token", response.token); // Stocke le token
       console.log("Sign-in successful:", response);
-      alert(`Welcome back, ${response.user.name}!`);
-      setFormData({ 
+      alert(`Bienvenue, ${formData.email}!`);
+      setFormData({
         email: "",
         password: "",
         name: "",
         prenom: "",
         domaine: "",
       });
+      window.location.href = "/stagiaire-profile"; // Redirige après connexion
     } catch (error) {
-      console.error("Error signing in:", error);
-      setError("Invalid email or password. Please try again.");
+      console.error("Error signing in:", error.response?.data || error.message);
+      setError(error.response?.data?.message || "Invalid email or password. Please try again.");
     }
   };
 
@@ -81,24 +94,25 @@ const FormulaireStagiaire = () => {
         <div className="signin-signup">
           <form onSubmit={handleSignIn} className="sign-in-form">
             <h2 className="title">Connexion</h2>
+            {error && <p className="error">{error}</p>}
             <div className="input-field">
               <MdEmail className="icon" />
-              <input 
-                type="email" 
+              <input
+                type="email"
                 name="email"
-                placeholder="Email" 
-                value={formData.email} 
+                placeholder="Email"
+                value={formData.email}
                 onChange={handleInputChange}
               />
-            </div> 
+            </div>
             <div className="input-field">
               <FaLock className="icon" />
-              <input 
-                type="password" 
+              <input
+                type="password"
                 name="password"
-                placeholder="Mot de passe" 
-                value={formData.password} 
-                onChange={handleInputChange} 
+                placeholder="Mot de passe"
+                value={formData.password}
+                onChange={handleInputChange}
               />
             </div>
             <input type="submit" value="Se connecter" className="btn solid" />
@@ -121,53 +135,54 @@ const FormulaireStagiaire = () => {
 
           <form onSubmit={handleSignUp} className="sign-up-form">
             <h2 className="title">Formulaire Stagiaire</h2>
+            {error && <p className="error">{error}</p>}
             <div className="input-field">
               <FaUser className="icon" />
-              <input 
-                type="text" 
+              <input
+                type="text"
                 name="name"
-                placeholder="Nom" 
-                value={formData.name} 
+                placeholder="Nom"
+                value={formData.name}
                 onChange={handleInputChange}
               />
             </div>
             <div className="input-field">
               <FaUser className="icon" />
-              <input 
-                type="text" 
+              <input
+                type="text"
                 name="prenom"
-                placeholder="Prénom" 
-                value={formData.prenom} 
+                placeholder="Prénom"
+                value={formData.prenom}
                 onChange={handleInputChange}
               />
             </div>
             <div className="input-field">
               <MdCastForEducation className="icon" />
-              <input 
-                type="text" 
+              <input
+                type="text"
                 name="domaine"
-                placeholder="Domaine" 
-                value={formData.domaine} 
+                placeholder="Domaine"
+                value={formData.domaine}
                 onChange={handleInputChange}
               />
             </div>
             <div className="input-field">
               <MdEmail className="icon" />
-              <input 
-                type="email" 
+              <input
+                type="email"
                 name="email"
-                placeholder="Email" 
-                value={formData.email} 
+                placeholder="Email"
+                value={formData.email}
                 onChange={handleInputChange}
               />
             </div>
             <div className="input-field">
               <FaLock className="icon" />
-              <input 
-                type="password" 
+              <input
+                type="password"
                 name="password"
-                placeholder="Mot de passe" 
-                value={formData.password} 
+                placeholder="Mot de passe"
+                value={formData.password}
                 onChange={handleInputChange}
               />
             </div>
@@ -195,8 +210,8 @@ const FormulaireStagiaire = () => {
           <div className="content">
             <h3>Nouvel utilisateur?</h3>
             <p>C'est par ici</p>
-            <button 
-              className="btn transparent" 
+            <button
+              className="btn transparent"
               onClick={() => setIsSignUpMode(true)}
             >
               S'inscrire
@@ -209,8 +224,8 @@ const FormulaireStagiaire = () => {
           <div className="content">
             <h3>Avez-vous un compte?</h3>
             <p>C'est par ici</p>
-            <button 
-              className="btn transparent" 
+            <button
+              className="btn transparent"
               onClick={() => setIsSignUpMode(false)}
             >
               Se connecter

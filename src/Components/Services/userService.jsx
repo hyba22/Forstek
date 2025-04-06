@@ -2,7 +2,6 @@ import axios from "axios";
 
 const API_BASE_URL = "http://localhost:3000/api";
 
-
 export const getUsers = async () => {
   try {
     const response = await axios.get(`${API_BASE_URL}/users`);
@@ -22,9 +21,10 @@ export const signUp = async (userData) => {
     throw error;
   }
 };
+
 export const createUser = async (user) => {
   try {
-    const response = await axios.post(API_URL, user);
+    const response = await axios.post(`${API_BASE_URL}/users`, user); 
     return response.data;
   } catch (error) {
     console.error("Error creating user:", error);
@@ -32,10 +32,9 @@ export const createUser = async (user) => {
   }
 };
 
-
 export const signIn = async (loginDto) => {
   try {
-    const response = await axios.post(`${AUTH_URL}/login`, loginDto);
+    const response = await axios.post(`${API_BASE_URL}/auth/login`, loginDto); // Corrigé AUTH_URL -> API_BASE_URL
     return response.data;
   } catch (error) {
     console.error("Error signing in:", error);

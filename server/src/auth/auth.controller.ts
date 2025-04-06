@@ -16,4 +16,8 @@ export class AuthController {
   login(@Body() loginDto: LoginDto): Promise<{ token: string }> {
     return this.authService.login(loginDto);
   }
+  @Post('logout')
+  logout() {
+    return { message: 'Déconnexion réussie' };
+  }
 }

@@ -1,5 +1,6 @@
-import { Column, Entity, IsNull, Long, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, IsNull, Long, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Role } from './dto/user.dto';
+import Demande from 'src/stagiaire/demande.entity';
 
 @Entity()
 class User {
@@ -46,6 +47,9 @@ class User {
     default: Role.UTILISATEUR,
   })
   role: Role;
+
+  @OneToMany(() => Demande, (demande) => demande.user)
+  demandes: Demande[];
 }
 
 export default User;
