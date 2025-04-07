@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import "./StagiaireProfile.css";
 
 const Parametres = () => {
-  const [nom, setNom] = useState("Jean Dupont");
-  const [email, setEmail] = useState("jean.dupont@example.com");
+  const [nom, setNom] = useState("Jasser Benslah");
+  const [email, setEmail] = useState("Jasser@example.com");
   const [motDePasse, setMotDePasse] = useState("");
 
   const handleSave = (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
-    fetch("http://localhost:3000/stagiaire/parametres", {
+    fetch("http://localhost:3000/api/stagiaire/parametres", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -25,7 +25,7 @@ const Parametres = () => {
   const handlePasswordChange = (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
-    fetch("http://localhost:3000/stagiaire/mot-de-passe", {
+    fetch("http://localhost:3000/api/stagiaire/mot-de-passe", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -41,7 +41,7 @@ const Parametres = () => {
   const handleDelete = () => {
     if (window.confirm("Voulez-vous vraiment supprimer votre compte ?")) {
       const token = localStorage.getItem("token");
-      fetch("http://localhost:3000/stagiaire/compte", {
+      fetch("http://localhost:3000/api/stagiaire/compte", {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

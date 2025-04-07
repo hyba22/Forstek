@@ -14,7 +14,9 @@ import FreelanceFormulaire from "./Components/Formulaires/Freelance/FreelanceFor
 import FooterPage from "./Components/Footer/FooterPage";
 import StartupProfile from "./Components/Profiles/Startup/StartupProfile";
 import StagiaireProfile from "./Components/Profiles/Stagiaire/StagiaireProfile";
-
+import Parametres from "./Components/Profiles/Stagiaire/Parametres";
+import SuiviDemande from "./Components/Profiles/Stagiaire/SuiviDemande";
+import Deconnexion from "./Components/Profiles/Stagiaire/Deconnexion";
 
 function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -42,6 +44,10 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/startupprofile" element={<StartupProfile />} />
         <Route path="/stagiaire-profile" element={<StagiaireProfile />} />
+        <Route path="/stagiaire/parametres" element={<Parametres />} />
+        <Route path="/stagiaire/suivi-demande" element={<SuiviDemande />} />
+        <Route path="/stagiaire/deconnexion" element={<Deconnexion/>} />
+
       </Routes>
       <FooterPage/>
     </Router>

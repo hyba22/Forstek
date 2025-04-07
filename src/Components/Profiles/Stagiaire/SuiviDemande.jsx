@@ -1,53 +1,49 @@
-import React, { useEffect, useState } from "react";
-import "./StagiaireProfile.css";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './StagiaireProfile.css';
 
 const SuiviDemande = () => {
   const [demandes, setDemandes] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
     if (!token) {
-      console.log("Aucun token trouvé dans localStorage");
-      alert("Veuillez vous connecter");
-      window.location.href = "/";
+      alert('Veuillez vous connecter');
+      window.location.href = '/';
       return;
     }
 
-    console.log("Envoi de la requête avec token:", token);
-    fetch("http://localhost:3000/stagiaire/suivi-demande", { 
-      method: "GET",
+    fetch('http://localhost:3000/api/stagiaire/suivi-demande', { 
       headers: {
-        "Authorization": `Bearer ${token}`,
-        "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
       },
     })
-      .then((response) => {
-        console.log("Statut de la réponse:", response.status);
-        if (!response.ok) {
-          if (response.status === 401) {
-            throw new Error("Non autorisé - Token invalide");
-          } else if (response.status === 404) {
-            throw new Error("Route non trouvée");
-          } else {
-            throw new Error(`Erreur HTTP: ${response.status}`);
-          }
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Données reçues:", data);
-        setDemandes(data.data || []);
-      })
-      .catch((error) => {
-        console.error("Erreur détaillée:", error.message);
-        alert(`Erreur: ${error.message}. Veuillez vous reconnecter.`);
-        window.location.href = "/";
+      .then(response => response.json())
+      .then(data => setDemandes(data.data || []))
+      .catch(error => {
+        alert(`Erreur: ${error.message}`);
+        window.location.href = '/';
       });
   }, []);
 
   return (
     <div className="content">
+      <div className="back-button-container">
+        <button 
+          onClick={() => navigate(-1)} 
+          className="back-button"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Retour
+        </button>
+      </div>
+      
       <h1 className="modern-title">Suivi de demande</h1>
+      
       <table className="modern-table">
         <thead>
           <tr>
@@ -60,7 +56,7 @@ const SuiviDemande = () => {
         </thead>
         <tbody>
           {demandes.length > 0 ? (
-            demandes.map((demande) => (
+            demandes.map(demande => (
               <tr key={demande.id}>
                 <td>{demande.nomSociete}</td>
                 <td>{demande.poste}</td>

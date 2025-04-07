@@ -7,7 +7,7 @@ const Deconnexion = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    fetch("http://localhost:3000/auth/logout", {
+    fetch("http://localhost:3000/api/auth/logout", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,

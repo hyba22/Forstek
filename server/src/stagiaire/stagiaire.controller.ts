@@ -13,7 +13,7 @@ export class StagiaireController {
     if (!request.user) {
       throw new UnauthorizedException('Utilisateur non authentifié');
     }
-    const userId = request.user.id; // Typage correct, plus besoin de ['id']
+    const userId = request.user.id; 
     const demandes = await this.stagiaireService.getDemandesByUser(userId);
     return { message: "Liste des demandes", data: demandes };
   }
@@ -23,7 +23,7 @@ export class StagiaireController {
     if (!request.user) {
       throw new UnauthorizedException('Utilisateur non authentifié');
     }
-    const userId = request.user.id; // Typage correct
+    const userId = request.user.id; 
     return this.stagiaireService.updateParametres(userId, data);
   }
 
@@ -32,7 +32,7 @@ export class StagiaireController {
     if (!request.user) {
       throw new UnauthorizedException('Utilisateur non authentifié');
     }
-    const userId = request.user.id; // Typage correct
+    const userId = request.user.id; 
     return this.stagiaireService.updatePassword(userId, data.motDePasse);
   }
 
@@ -41,7 +41,7 @@ export class StagiaireController {
     if (!request.user) {
       throw new UnauthorizedException('Utilisateur non authentifié');
     }
-    const userId = request.user.id; // Typage correct
+    const userId = request.user.id; 
     return this.stagiaireService.deleteCompte(userId);
   }
 }

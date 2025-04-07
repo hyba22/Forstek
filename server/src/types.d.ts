@@ -2,6 +2,6 @@ import User from './users/user.entity';
 
 declare module 'express' {
   interface Request {
-    user?: User; // Utilise l'entité User complète
+    user?: User;
   }
 }

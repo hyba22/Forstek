@@ -25,7 +25,7 @@ import { UsersModule } from 'src/users/users.module';
       },
     }),
     TypeOrmModule.forFeature([User]),
-    UsersModule, // Pour utiliser UsersService dans AuthService
+    UsersModule, 
 
   ],
   controllers: [AuthController],
