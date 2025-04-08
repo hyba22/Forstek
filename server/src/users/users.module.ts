@@ -8,6 +8,6 @@ import { UsersService } from './users.service';
   imports: [TypeOrmModule.forFeature([User])],
   controllers: [UsersController],
   providers: [UsersService],
-  exports: [UsersService], // Ajouté pour que AuthService puisse l’utiliser
+  exports: [UsersService], 
 })
 export class UsersModule {}

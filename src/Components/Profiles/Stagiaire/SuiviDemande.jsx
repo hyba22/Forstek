@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './StagiaireProfile.css';
+import styles from './suiviDemande.module.css'; 
 
 const SuiviDemande = () => {
   const [demandes, setDemandes] = useState([]);
@@ -10,7 +10,7 @@ const SuiviDemande = () => {
     const token = localStorage.getItem('token');
     if (!token) {
       alert('Veuillez vous connecter');
-      window.location.href = '/';
+      navigate('/'); 
       return;
     }
 
@@ -20,20 +20,26 @@ const SuiviDemande = () => {
         'Content-Type': 'application/json',
       },
     })
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Erreur HTTP: ${response.status}`);
+        }
+        return response.json();
+      })
       .then(data => setDemandes(data.data || []))
       .catch(error => {
+        console.error('Erreur:', error);
         alert(`Erreur: ${error.message}`);
-        window.location.href = '/';
+        navigate('/');
       });
-  }, []);
+  }, [navigate]);
 
   return (
-    <div className="content">
-      <div className="back-button-container">
+    <div className={styles.body}>
+      <div className={styles.backButtonContainer}>
         <button 
-          onClick={() => navigate(-1)} 
-          className="back-button"
+          onClick={() => navigate('/stagiaire-profile')} 
+          className={styles.backButton}
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -42,9 +48,9 @@ const SuiviDemande = () => {
         </button>
       </div>
       
-      <h1 className="modern-title">Suivi de demande</h1>
+      <h1 className={styles.modernTitle}>Suivi de demande</h1>
       
-      <table className="modern-table">
+      <table className={styles.modernTable}>
         <thead>
           <tr>
             <th>Nom de société</th>

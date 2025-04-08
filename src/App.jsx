@@ -17,7 +17,10 @@ import StagiaireProfile from "./Components/Profiles/Stagiaire/StagiaireProfile";
 import Parametres from "./Components/Profiles/Stagiaire/Parametres";
 import SuiviDemande from "./Components/Profiles/Stagiaire/SuiviDemande";
 import Deconnexion from "./Components/Profiles/Stagiaire/Deconnexion";
-
+import AccueilStagiaire from "./Components/Profiles/Stagiaire/AccueilStagiaire";
+import RendezVous from "./Components/Profiles/Stagiaire/RendezVous";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
@@ -34,7 +37,7 @@ function App() {
       <SignUpModal isOpen={isSignUpModalOpen} onClose={closeSignUpModal} />
       <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
       <Routes>
-       <Route path="/" element={<Accueil />} />  
+        <Route path="/" element={<Accueil />} />
         <Route path="/investisseur" element={<FormulaireInvestisseur />} />
         <Route path="/porteur-de-projet" element={<FormulairePorteurDeProjet />} />
         <Route path="/stagiaire" element={<FormulaireStagiaire />} />
@@ -43,13 +46,15 @@ function App() {
         <Route path="/freelance" element={<FreelanceFormulaire />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/startupprofile" element={<StartupProfile />} />
-        <Route path="/stagiaire-profile" element={<StagiaireProfile />} />
-        <Route path="/stagiaire/parametres" element={<Parametres />} />
-        <Route path="/stagiaire/suivi-demande" element={<SuiviDemande />} />
-        <Route path="/stagiaire/deconnexion" element={<Deconnexion/>} />
-
+        <Route path="/stagiaire-profile" element={<StagiaireProfile />}>
+          <Route index element={<AccueilStagiaire />} />
+          <Route path="suivi-demande" element={<SuiviDemande />} />
+          <Route path="parametres" element={<Parametres />} />
+          <Route path="deconnexion" element={<Deconnexion />} />
+          <Route path="rendez-vous" element={<RendezVous />} />
+        </Route>
       </Routes>
-      <FooterPage/>
+      <FooterPage />
     </Router>
   );
 }

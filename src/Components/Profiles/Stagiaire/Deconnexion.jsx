@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./StagiaireProfile.css";
+import "./StagiaireProfile.module.css";
 
 const Deconnexion = () => {
   const navigate = useNavigate();

@@ -1,40 +1,28 @@
-import React from 'react';
-import { Link, Routes, Route } from 'react-router-dom';
-import SuiviDemande from './SuiviDemande';
-import Parametres from './Parametres';
-import Deconnexion from './Deconnexion';
-import AccueilStagiaire from './AccueilStagiaire';
-import './StagiaireProfile.css';
+import React, { useState } from 'react';
+import styles from './StagiaireProfile.module.css';
+import SidebarStagiaire from './SidebarStagiaire';
+import { Outlet } from 'react-router-dom';
 
-const StagiaireProfile = () => (
-  <div className="stagiaire-profile">
-    <div className="sidebar modern-sidebar">
-      <h2 className="modern-title">Profil Stagiaire</h2>
-      <ul>
-        <li>
-          <Link to="/stagiaire/suivi-demande" className="modern-link">Suivi de demande</Link>
-        </li>
-        <li>
-          <Link to="/offres-disponibles" className="modern-link">Offres disponibles</Link>
-        </li>
-        <li>
-          <Link to="/stagiaire/parametres" className="modern-link">Paramètres</Link>
-        </li>
-        <li>
-          <Link to="/stagiaire/deconnexion" className="modern-link">Déconnexion</Link>
-        </li>
-      </ul>
-    </div>
+const StagiaireProfile = () => {
+  const [collapsed, setCollapsed] = useState(false);
 
-    <div className="content modern-content">
-      <Routes>
-        <Route path="/" element={<AccueilStagiaire />} />
-        <Route path="/suivi-demande" element={<SuiviDemande />} />
-        <Route path="/parametres" element={<Parametres />} />
-        <Route path="/deconnexion" element={<Deconnexion />} />
-      </Routes>
+  return ( 
+    <div className={styles.container}>
+      <div className={styles.subContainer}>
+        <div className={`${styles.sideBar} ${collapsed ? styles.collapsed : ''}`}>
+          <div className={styles.sideMenu}>
+            <SidebarStagiaire 
+              collapsed={collapsed}
+              setCollapsed={setCollapsed}
+            /> 
+          </div>
+        </div>
+        <div className={`${styles.body} ${collapsed ? styles.collapsedBody : ''}`}>
+          <Outlet />
+        </div>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default StagiaireProfile;
