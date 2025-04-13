@@ -1,0 +1,11 @@
+pipeline{
+    agent any
+
+    stages{
+        stage('Build') {
+            steps{
+              git branch: 'hybaRepository', url: 'https://github.com/hyba22/Forstek'
+            }
+        }
+    }
+}

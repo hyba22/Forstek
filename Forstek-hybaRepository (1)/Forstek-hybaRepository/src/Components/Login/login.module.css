@@ -1,0 +1,66 @@
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal h2{
+    justify-self: center;
+}
+
+.label{
+    justify-self: center;
+    margin: 0.25rem;
+}
+
+.formGroup {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.textfield{
+    margin-top: 6px !important;
+    width: 250px;
+}
+
+.submitButton {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.closeButton {
+    margin-top: 10px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 75px !important;
+    margin-left: 1.5rem !important;
+}
+
+.btns{
+    display: flex;
+    justify-content: space-around;
+} 

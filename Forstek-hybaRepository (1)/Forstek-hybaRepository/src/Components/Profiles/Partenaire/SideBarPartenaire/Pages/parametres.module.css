@@ -1,0 +1,347 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.header {
+  margin-bottom: 2rem;
+}
+
+.header h1 {
+  font-size: 2rem;
+  color: #2d3748;
+  margin: 0 0 0.25rem 0;
+  transition: color 0.3s ease;
+}
+
+.header p {
+  color: #718096;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #e2e8f0;
+  margin-bottom: 2rem;
+  gap: 0.5rem;
+}
+
+.tab {
+  padding: 0.75rem 1.5rem;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  font-weight: 600;
+  color: #718096;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tab:hover {
+  color: #4299e1;
+}
+
+.activeTab {
+  color: #4299e1;
+  border-bottom-color: #4299e1;
+}
+
+.tabContent {
+  background: white;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tabContent h2 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: #2d3748;
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.settingsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.settingItem {
+  margin-bottom: 1.5rem;
+}
+
+.settingItem label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #4a5568;
+  transition: color 0.3s ease;
+}
+
+.inputField {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.inputField:focus {
+  border-color: #4299e1;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+}
+
+.settingValue {
+  padding: 0.75rem;
+  background: #f7fafc;
+  border-radius: 0.375rem;
+  border-left: 3px solid #4299e1;
+  transition: all 0.3s ease;
+}
+
+.fieldDescription {
+  color: #718096;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  transition: color 0.3s ease;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #cbd5e0;
+  transition: .2s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .2s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #4299e1;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+  border: none;
+}
+
+.primaryButton {
+  background: #4299e1;
+  color: white;
+}
+
+.primaryButton:hover {
+  background: #3182ce;
+}
+
+.secondaryButton {
+  background: #e2e8f0;
+  color: #4a5568;
+}
+
+.secondaryButton:hover {
+  background: #cbd5e0;
+}
+
+.notification {
+  padding: 1rem;
+  border-radius: 0.375rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.notification.success {
+  background-color: #48bb78;
+  color: white;
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-left-color: #4299e1;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.skeletonLoader {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  height: 40px;
+  border-radius: 4px;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Dark mode styles */
+.container.darkMode {
+  background-color: #1a202c;
+  color: #e2e8f0;
+}
+
+.container.darkMode .header h1,
+.container.darkMode .header p,
+.container.darkMode .tabContent h2,
+.container.darkMode .settingItem label {
+  color: #e2e8f0;
+}
+
+.container.darkMode .tabContent {
+  background-color: #2d3748;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.container.darkMode .inputField {
+  background-color: #4a5568;
+  color: #e2e8f0;
+  border-color: #4a5568;
+}
+
+.container.darkMode .inputField:focus {
+  border-color: #63b3ed;
+  box-shadow: 0 0 0 3px rgba(99, 179, 237, 0.3);
+}
+
+.container.darkMode .settingValue {
+  background-color: #4a5568;
+  color: #e2e8f0;
+  border-left-color: #63b3ed;
+}
+
+.container.darkMode .fieldDescription {
+  color: #a0aec0;
+}
+
+.container.darkMode .secondaryButton {
+  background-color: #4a5568;
+  color: #e2e8f0;
+}
+
+.container.darkMode .secondaryButton:hover {
+  background-color: #718096;
+}
+
+.container.darkMode .tab {
+  color: #a0aec0;
+}
+
+.container.darkMode .tab:hover,
+.container.darkMode .activeTab {
+  color: #63b3ed;
+}
+
+.container.darkMode .activeTab {
+  border-bottom-color: #63b3ed;
+}
+
+.container.darkMode .tabs {
+  border-bottom-color: #4a5568;
+}
+
+.container.darkMode .slider {
+  background-color: #4a5568;
+}
+
+.container.darkMode input:checked + .slider {
+  background-color: #63b3ed;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .tabs {
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+  }
+  
+  .settingsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .actions {
+    flex-direction: column;
+  }
+  
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+  }
+}
