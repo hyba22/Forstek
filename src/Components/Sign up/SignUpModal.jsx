@@ -6,41 +6,43 @@ import Radio from "@mui/joy/Radio";
 import RadioGroup from "@mui/joy/RadioGroup";
 import Button from "@mui/joy/Button";
 
+const roleOptions = [
+  { label: "Porteur de projet", value: "porteur_de_projet" },
+  { label: "Investisseur", value: "investisseur" },
+  { label: "Stagiaire", value: "stagiaire" },
+  { label: "Startup", value: "startup" },
+  { label: "Partenaire", value: "partenaire" },
+  { label: "Freelance", value: "freelance" },
+];
+
 const SignUpModal = ({ isOpen, onClose }) => {
-  const [selectedValue, setSelectedValue] = useState("Porteur de projet");
+  const [selectedRole, setSelectedRole] = useState("porteur_de_projet");
   const navigate = useNavigate();
 
   const handleChange = (event) => {
-    setSelectedValue(event.target.value);
+    setSelectedRole(event.target.value);
   };
 
   const handleSignUp = () => {
-    // Close the modal
     onClose();
+    navigate(`/signup-form`, { 
+      state: { 
+        role: selectedRole,
+        roleSpecificRoute: getRoleRoute(selectedRole)
+      } 
+    });
+  };
 
-    // Navigate to the appropriate route based on the selected role
-    switch (selectedValue) {
-      case "Porteur de projet":
-        navigate("/porteur-de-projet");
-        break;
-      case "Investisseur":
-        navigate("/investisseur");
-        break;
-      case "Stagiaire":
-        navigate("/stagiaire");
-        break;
-      case "Startup":
-        navigate("/startup");
-        break;
-      case "Partenaire":
-        navigate("/partenaire");
-        break;
-      case "Freelance":
-        navigate("/freelance");
-        break;
-      default:
-        break;
-    }
+  const getRoleRoute = (role) => {
+    const routes = {
+      porteur_de_projet: "/porteur-de-projet",
+      investisseur: "/investisseur",
+      stagiaire: "/stagiaire",
+      startup: "/startup",
+      partenaire: "/partenaire",
+      freelance: "/freelance",
+    };
+    return routes[role] || "/signup";
   };
 
   if (!isOpen) return null;
@@ -51,54 +53,29 @@ const SignUpModal = ({ isOpen, onClose }) => {
       <div className={styles.roles}>
         <FormControl>
           <RadioGroup
-            value={selectedValue}
+            value={selectedRole}
             onChange={handleChange}
-            name="radio-buttons-group"
+            name="role-radio-group"
           >
-            <div className={styles.roleOption}>
-              <Radio value="Porteur de projet" variant="outlined" />
-              <label>Porteur de projet</label>
-            </div>
-            <div className={styles.roleOption}>
-              <Radio value="Investisseur" variant="outlined" />
-              <label>Investisseur</label>
-            </div>
-            <div className={styles.roleOption}>
-              <Radio value="Stagiaire" variant="outlined" />
-              <label>Stagiaire</label>
-            </div>
-            <div className={styles.roleOption}>
-              <Radio value="Startup" variant="outlined" />
-              <label>Startup</label>
-            </div>
-            <div className={styles.roleOption}>
-              <Radio value="Partenaire" variant="outlined" />
-              <label>Partenaire</label>
-            </div>
-            <div className={styles.roleOption}>
-              <Radio value="Freelance" variant="outlined" />
-              <label>Freelance</label>
-            </div>
+            {roleOptions.map((option) => (
+              <div key={option.value} className={styles.roleOption}>
+                <Radio 
+                  value={option.value}
+                  variant="outlined"
+                  checked={selectedRole === option.value}
+                />
+                <label>{option.label}</label>
+              </div>
+            ))}
           </RadioGroup>
         </FormControl>
 
         <div className={styles.btns}>
-          <Button
-            variant="outlined"
-            type="submit"
-            color="primary"
-            className={styles.submitButton}
-            onClick={handleSignUp}
-          >
+          <Button onClick={handleSignUp} variant="outlined" color="primary">
             S'inscrire
           </Button>
-          <Button
-            variant="outlined"
-            color="danger"
-            onClick={onClose}
-            className={styles.closeButton}
-          >
-            Close
+          <Button onClick={onClose} variant="outlined" color="danger">
+            Fermer
           </Button>
         </div>
       </div>

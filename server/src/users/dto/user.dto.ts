@@ -1,6 +1,6 @@
 import { IsEmail, IsIn, IsNotEmpty, MinLength, IsOptional } from 'class-validator';
 
-export enum Role {
+export enum Role { 
   ADMIN = 'admin',
   PORTEUR_DE_PROJET = 'porteur_de_projet',
   STARTUP = 'startup',

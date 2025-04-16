@@ -1,4 +1,4 @@
-import { IsDate, IsEmail, IsNotEmpty, IsOptional, IsString, IsUrl, MinLength } from 'class-validator';
+import { IsDate, IsEmail, IsEnum, IsIn, IsNotEmpty, IsOptional, IsString, IsUrl, MinLength } from 'class-validator';
 import { Role } from '../../users/dto/user.dto';
 
 export class SignUpDto {
@@ -47,6 +47,7 @@ export class SignUpDto {
   @IsDate()
   dateCreation?: Date;
 
-  @IsOptional()
-  role?: Role;
+  @IsNotEmpty()
+  @IsEnum(Role)
+  role: Role;
 }

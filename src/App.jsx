@@ -17,6 +17,11 @@ import StartupOffres from "./Components/Profiles/Startup/SideBarStartup/Pages/St
 import EvaluationProjets from "./Components/Profiles/Startup/SideBarStartup/Pages/EvaluationProjets";
 import RendezVous from "./Components/Profiles/Startup/SideBarStartup/Pages/RendezVous";
 import Parametres from "./Components/Profiles/Startup/SideBarStartup/Pages/Parametres";
+import InvestisseurProfile from "./Components/Profiles/Investisseur/InvestisseurProfile";
+import RendezVouss from "./Components/Profiles/Investisseur/InvestisseurSidebar/Pages/Rendez-Vous";
+import ListeIdees from "./Components/Profiles/Investisseur/InvestisseurSidebar/Pages/ListeIdees";
+import FreelanceProfile from "./Components/Profiles/Freelance/FreelanceProfile";
+import ListeProjetsFreelance from "./Components/Profiles/Freelance/FreelanceSideBar/Pages/ListeProjetsFreelance";
 
 function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -36,9 +41,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Accueil />} />
         <Route path="/investisseur" element={<FormulaireInvestisseur />} />
-        <Route
-          path="/porteur-de-projet"
-          element={<FormulairePorteurDeProjet />}
+        <Route path="/porteur-de-projet" element={<FormulairePorteurDeProjet />}
         />
         <Route path="/stagiaire" element={<FormulaireStagiaire />} />
         <Route path="/startup" element={<FormulaireStartup />} />
@@ -52,8 +55,20 @@ function App() {
           <Route path="parametres" element={<Parametres />} />
           <Route index element={<div>Dashboard Content</div>} />
         </Route>
+        <Route path="/investisseurProfile" element={<InvestisseurProfile/>} >
+          <Route path="ListeIdees" element={<ListeIdees />} />
+          <Route path="evaluation" element={<EvaluationProjets />} />
+          <Route path="rendezVous" element={<RendezVouss />} />
+          <Route path="parametres" element={<Parametres />} />
+          <Route index element={<div>Dashboard Content</div>} />
+        </Route>
+        <Route path="/freelanceProfile" element={<FreelanceProfile/>}>
+          <Route path="listeProjetsFreelance" element={<ListeProjetsFreelance />} />
+          <Route path="parametres" element={<Parametres />} />
+          <Route index element={<div>Dashboard Content</div>} />
+        </Route>
       </Routes>
-      {/**  <FooterPage/> */}
+      {/**  <FooterPage/> */} 
     </Router>
   );
 }

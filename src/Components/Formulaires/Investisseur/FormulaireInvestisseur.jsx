@@ -11,7 +11,7 @@ import { MdCastForEducation, MdEmail } from "react-icons/md";
 import "./investisseurLog.module.css";
 import { getUsers, signUp, signIn } from "../../Services/userService";
 
-const FormulaireStagiaire = () => {
+const FormulaireInvestisseur = () => {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
   const [users, setUsers] = useState([]);
   const [formData, setFormData] = useState({
@@ -241,4 +241,4 @@ const FormulaireStagiaire = () => {
   );
 };
 
-export default FormulaireStagiaire;
+export default FormulaireInvestisseur;

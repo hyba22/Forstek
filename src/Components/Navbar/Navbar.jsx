@@ -4,6 +4,9 @@ import { IoMenu } from "react-icons/io5";
 
 const Navbar = ({ onLoginClick, onSignUpClick }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const handleRoleSelect = (role) => {
+    console.log("Selected role:", role);
+  };
 
   return (
     <div className={styles.container}>
@@ -38,11 +41,11 @@ const Navbar = ({ onLoginClick, onSignUpClick }) => {
           </li>
           <li>
             <div className={styles.buttons}>
-              <button className={styles.btnSign} onClick={onSignUpClick}>
-                Sign up
+              <button className={styles.btnSign} onClick={onSignUpClick} onRoleSelect={handleRoleSelect}>
+                S'inscrire
               </button>
               <button className={styles.btnLog} onClick={onLoginClick}>
-                Login
+                Se connecter
               </button>
             </div>
           </li>

@@ -43,7 +43,7 @@ class User {
   @Column({
     type: 'enum',
     enum: Role,
-    default: Role.UTILISATEUR,
+    nullable: false 
   })
   role: Role;
 }

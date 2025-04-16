@@ -12,14 +12,13 @@ export const getUsers = async () => {
     throw error;
   }
 };
-
 export const signUp = async (userData) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/auth/signup`, userData);
     return response.data;
   } catch (error) {
     console.error("Signup Error:", error.response?.data || error.message);
-    throw error;
+    throw new Error(error.response?.data?.message || "Registration failed");
   }
 };
 export const createUser = async (user) => {
