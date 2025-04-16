@@ -55,6 +55,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Accueil />} />
         <Route path="/contact" element={<Contact />} />
+        {/* sign up forms routes */}
         <Route path="/signup">
           <Route path="investisseur" element={<FormulaireInvestisseur />} />
           <Route path="porteur" element={<FormulairePorteurDeProjet />} />
@@ -64,6 +65,7 @@ function App() {
           <Route path="freelance" element={<FreelanceFormulaire />} />
         </Route>
 
+         {/* startup profile's routes */}
         <Route path="/profile/startup" element={<StartupProfile />}>
           <Route path="offres" element={<StartupOffres />} />
           <Route path="evaluation" element={<EvaluationProjets />} />
@@ -71,6 +73,7 @@ function App() {
           <Route path="parametres" element={<Parametres />} />
           <Route index element={<div>Dashboard Content</div>} />
         </Route>
+         {/* investisseur profile's routes */}
         <Route path="/profile/investisseur" element={<InvestisseurProfile/>} >
           <Route path="ListeIdees" element={<ListeIdees />} />
           <Route path="evaluation" element={<EvaluationProjets />} />
@@ -78,11 +81,13 @@ function App() {
           <Route path="parametres" element={<Parametres />} />
           <Route index element={<div>Dashboard Content</div>} />
         </Route>
-        <Route path="/freelanceProfile" element={<FreelanceProfile/>}>
+        {/* freelancer profile's routes */}
+        <Route path="/profile/freelance" element={<FreelanceProfile/>}>
           <Route path="listeProjetsFreelance" element={<ListeProjetsFreelance />} />
           <Route path="parametres" element={<Parametres />} />
           <Route index element={<div>Dashboard Content</div>} />
         </Route>
+        {/* stagiaire profile's routes */}
         <Route path="/profile/stagiaire" element={<StagiaireProfile />}>
           <Route index element={<AccueilStagiaire />} />
           <Route path="suivi-demande" element={<SuiviDemande />} />
@@ -90,6 +95,7 @@ function App() {
           <Route path="deconnexion" element={<Deconnexion />} />
           <Route path="rendez-vous" element={<RendezVous />} />
         </Route> 
+        {/* partenaire profile's routes */}
         <Route path="/profile/partenaire" element={<PartenaireProfile />}>
           <Route path="demande" element={<Demande />} />
           <Route path="evaluation" element={<Evaluations />} />
@@ -97,6 +103,7 @@ function App() {
           <Route path="parametres" element={<ParametresPartenaire />} />
           <Route index element={<div>Dashboard Content</div>} />
         </Route>
+        {/* porteur profile's routes */}
         <Route path="/profile/porteur" element={<SideBarProjet />}>
           <Route path="depose-projet" element={<DeposeProjet />} />
           <Route path="liste-projet" element={<ListeProjet />} />
