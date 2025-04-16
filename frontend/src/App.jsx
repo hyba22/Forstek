@@ -64,14 +64,14 @@ function App() {
           <Route path="freelance" element={<FreelanceFormulaire />} />
         </Route>
 
-        <Route path="/startupprofile" element={<StartupProfile />}>
+        <Route path="/profile/startup" element={<StartupProfile />}>
           <Route path="offres" element={<StartupOffres />} />
           <Route path="evaluation" element={<EvaluationProjets />} />
           <Route path="rendez-vous" element={<RendezVous />} />
           <Route path="parametres" element={<Parametres />} />
           <Route index element={<div>Dashboard Content</div>} />
         </Route>
-        <Route path="/investisseurProfile" element={<InvestisseurProfile/>} >
+        <Route path="/profile/investisseur" element={<InvestisseurProfile/>} >
           <Route path="ListeIdees" element={<ListeIdees />} />
           <Route path="evaluation" element={<EvaluationProjets />} />
           <Route path="rendezVous" element={<RendezVouss />} />
@@ -83,21 +83,21 @@ function App() {
           <Route path="parametres" element={<Parametres />} />
           <Route index element={<div>Dashboard Content</div>} />
         </Route>
-        <Route path="/stagiaire-profile" element={<StagiaireProfile />}>
+        <Route path="/profile/stagiaire" element={<StagiaireProfile />}>
           <Route index element={<AccueilStagiaire />} />
           <Route path="suivi-demande" element={<SuiviDemande />} />
           <Route path="parametres" element={<Parametres />} />
           <Route path="deconnexion" element={<Deconnexion />} />
           <Route path="rendez-vous" element={<RendezVous />} />
-        </Route>
-        <Route path="/partenaireprofile" element={<PartenaireProfile />}>
+        </Route> 
+        <Route path="/profile/partenaire" element={<PartenaireProfile />}>
           <Route path="demande" element={<Demande />} />
           <Route path="evaluation" element={<Evaluations />} />
           <Route path="rendez-vous" element={<RendezVousPartenaire />} />
           <Route path="parametres" element={<ParametresPartenaire />} />
           <Route index element={<div>Dashboard Content</div>} />
         </Route>
-        <Route path="/side-bar-projet" element={<SideBarProjet />}>
+        <Route path="/profile/porteur" element={<SideBarProjet />}>
           <Route path="depose-projet" element={<DeposeProjet />} />
           <Route path="liste-projet" element={<ListeProjet />} />
           <Route path="rendv" element={<RendV />} />

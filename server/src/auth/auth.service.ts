@@ -91,42 +91,26 @@ export class AuthService {
     }
   }
 
-  async login(loginDto: LoginDto): Promise<{ token: string }> {
-    console.log('Starting login process with DTO:', loginDto);
-    try {
-      const { email, password } = loginDto;
+ // auth.service.ts
+async login(loginDto: LoginDto): Promise<{ token: string; role: string }> {
+  const { email, password } = loginDto;
 
-      console.log('Searching for user with email:', email);
-      const user = await this.usersRepository.findOne({
-        where: { email },
-      });
-
-      if (!user) {
-        console.log('User not found for email:', email);
-        throw new UnauthorizedException('Invalid email or password');
-      }
-
-      console.log('User found:', user);
-      console.log('Comparing password for user email:', email);
-      const isPasswordMatched = await bcrypt.compare(password, user.password);
-
-      if (!isPasswordMatched) {
-        console.log('Password does not match for user email:', email);
-        throw new UnauthorizedException('Invalid email or password');
-      }
-
-      console.log('Password matched, generating JWT token for user ID:', user.id);
-      const token = this.jwtService.sign({ 
-        id: user.id,
-        email: user.email,
-        role: user.role 
-      });
-      console.log('Token generated:', token);
-
-      return { token };
-    } catch (error) {
-      console.error('Error in login:', error.message || error);
-      throw new UnauthorizedException('Login failed');
-    }
+  const user = await this.usersRepository.findOne({ where: { email } });
+  if (!user) {
+    throw new UnauthorizedException('Invalid email or password');
   }
+
+  const isPasswordMatched = await bcrypt.compare(password, user.password);
+  if (!isPasswordMatched) {
+    throw new UnauthorizedException('Invalid email or password');
+  }
+
+  const token = this.jwtService.sign({ 
+    id: user.id,
+    email: user.email,
+    role: user.role
+  });
+
+  return { token, role: user.role };
+};
 }

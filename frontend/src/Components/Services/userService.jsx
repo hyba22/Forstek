@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API_BASE_URL = "http://localhost:3000/api";
-
+const AUTH_URL = `${API_BASE_URL}/auth`;
 
 export const getUsers = async () => {
   try {
@@ -38,17 +38,21 @@ export const createUser = async (user) => {
   }
 };
  
-
 export const signIn = async (loginDto) => {
   try {
-    const response = await axios.post(`${AUTH_URL}/login`, loginDto);
+    // Ensure this is a POST request to the correct endpoint
+    const response = await axios.post(`${AUTH_URL}/login`, loginDto, {
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
     return response.data;
   } catch (error) {
-    console.error("Error signing in:", error);
-    throw error;
+    console.error("Login Error:", error.response?.data || error.message);
+    throw new Error(error.response?.data?.message || "Login failed");
   }
 };
-
 
 //offre functions
 export const getOffers = async () => {
