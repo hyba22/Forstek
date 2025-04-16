@@ -1,0 +1,10 @@
+.container{
+    overflow: hidden !important;
+    width: 1200px;
+    height: 800px;
+    
+}
+
+.calendar{
+    overflow:  hidden !important;
+}

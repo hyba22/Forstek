@@ -2,7 +2,7 @@ import { IsEmail, IsIn, IsNotEmpty, MinLength, IsOptional } from 'class-validato
 
 export enum Role { 
   ADMIN = 'admin',
-  PORTEUR_DE_PROJET = 'porteur_de_projet',
+  PORTEUR = 'porteur',
   STARTUP = 'startup',
   STAGIAIRE = 'stagiaire',
   PARTENAIRE = 'partenaire',
@@ -47,7 +47,7 @@ export class CreateUserDto {
   @IsNotEmpty()
   @IsIn([
     Role.ADMIN,
-    Role.PORTEUR_DE_PROJET,
+    Role.PORTEUR,
     Role.STARTUP,
     Role.STAGIAIRE,
     Role.PARTENAIRE,
@@ -57,6 +57,5 @@ export class CreateUserDto {
     Role.FREELANCE
   ], { message: 'Rôle invalide. Choisissez un rôle valide.' })
   role: Role;
-
 
 }

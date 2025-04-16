@@ -25,7 +25,7 @@ export class RoleRedirectGuard implements CanActivate {
     // define routes for each profile 
     const roleRoutes = {
       [Role.ADMIN]: '/admin/dashboard',
-      [Role.PORTEUR_DE_PROJET]: '/project-holder/dashboard',
+      [Role.PORTEUR]: '/project-holder/dashboard',
       [Role.STARTUP]: '/startupprofile',
       [Role.STAGIAIRE]: '/intern/dashboard',
       [Role.PARTENAIRE]: '/contact',

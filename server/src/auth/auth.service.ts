@@ -21,6 +21,11 @@ export class AuthService {
   ) {}
 
   async signUp(signUpDto: SignUpDto): Promise<{ token: string }> {
+    const validRoles = Object.values(Role);
+    if (!validRoles.includes(signUpDto.role)) {
+      throw new ConflictException('Invalid role specified');
+    }
+  
     console.log('Starting signUp process with DTO:', signUpDto);
     try {
       const {
@@ -35,7 +40,7 @@ export class AuthService {
         nomSociete,
         adressePostale,
         dateCreation,
-        role = Role.UTILISATEUR 
+        role ,
       } = signUpDto;
   
       
@@ -67,7 +72,7 @@ export class AuthService {
       console.log('Saving user to database...');
       await this.usersRepository.save(user);
       console.log('User saved successfully:', user);
-  
+      console.log('Creating user with role:', signUpDto.role);
       console.log('Generating JWT token for user ID:', user.id);
       const token = this.jwtService.sign({ 
         id: user.id,
@@ -80,7 +85,7 @@ export class AuthService {
     } catch (error) {
       console.error('Error in signUp:', error.message || error);
       if (error instanceof ConflictException) {
-        throw error; // Re-throw specific exceptions
+        throw error; 
       }
       throw new ConflictException('Registration failed');
     }

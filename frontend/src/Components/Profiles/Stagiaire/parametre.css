@@ -1,0 +1,172 @@
+/* parametre.css */
+@import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary-color: #2c3e50;
+  --secondary-color: #3498db;
+  --accent-color: #e74c3c;
+  --light-bg: #f8f9fa;
+  --dark-text: #2c3e50;
+  --light-text: #ecf0f1;
+  --border-radius: 8px;
+  --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Correction principale - Suppression du cercle bleu */
+.form-control:focus,
+.modern-input:focus,
+.btn:focus,
+button:focus,
+input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: #ced4da !important;
+}
+
+/* Styles globaux */
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--light-bg);
+  color: var(--dark-text);
+  line-height: 1.6;
+}
+
+.content {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+/* Bouton de retour */
+.back-button-container {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: 1px solid var(--secondary-color);
+  border-radius: var(--border-radius);
+  color: var(--secondary-color);
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.back-button:hover {
+  background: var(--secondary-color);
+  color: var(--light-text);
+}
+
+/* Titres */
+.modern-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 2.5rem;
+  text-align: center;
+  position: relative;
+}
+
+.modern-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+}
+
+/* Cartes */
+.card {
+  background: white;
+  border: none;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  margin-bottom: 2rem;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Formulaires */
+.modern-form {
+  padding: 1.5rem;
+}
+
+.modern-label {
+  display: block;
+  margin-bottom: 0.8rem;
+  font-weight: 500;
+  color: var(--dark-text);
+}
+
+.modern-input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  transition: all 0.3s;
+  background-color: #f8f9fa;
+}
+
+.modern-input:focus {
+  border-color: var(--primary-color);
+  background-color: white;
+}
+
+/* Boutons */
+.modern-button {
+  background: linear-gradient(135deg, var(--secondary-color), #2980b9);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.modern-button:hover {
+  background: linear-gradient(135deg, #2980b9, var(--secondary-color));
+  transform: translateY(-2px);
+}
+
+.modern-button.danger {
+  background: linear-gradient(135deg, var(--accent-color), #c0392b);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .content {
+    padding: 0 1rem;
+  }
+  
+  .modern-title {
+    font-size: 1.8rem;
+  }
+  
+  .modern-button {
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
+  }
+}
