@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./sideBarStartup.module.css";
 import { NavLink, useLocation } from "react-router-dom";
 
-
+ 
 const SideBarStartup = () => {
   const location = useLocation();
   const [collapsed, setCollapsed] = useState(false);

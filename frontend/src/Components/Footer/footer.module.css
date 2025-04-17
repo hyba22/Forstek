@@ -1,6 +1,7 @@
 .container {
     margin-top: 5rem;
     height: 100%;
+    position: relative;
 }
 
 .content {

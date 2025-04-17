@@ -14,7 +14,6 @@ import FreelanceFormulaire from "./Components/Formulaires/Freelance/FreelanceFor
 import FooterPage from "./Components/Footer/FooterPage";
 import StartupProfile from "./Components/Profiles/Startup/StartupProfile";
 import StartupOffres from "./Components/Profiles/Startup/SideBarStartup/Pages/StartupOffres";
-import EvaluationProjets from "./Components/Profiles/Startup/SideBarStartup/Pages/EvaluationProjets";
 import RendezVous from "./Components/Profiles/Startup/SideBarStartup/Pages/RendezVous";
 import Parametres from "./Components/Profiles/Startup/SideBarStartup/Pages/Parametres";
 import InvestisseurProfile from "./Components/Profiles/Investisseur/InvestisseurProfile";
@@ -36,6 +35,7 @@ import ListePorteur from "./Components/Profiles/Porteur/ListePorteur/ListePorteu
 import RendV from "./Components/Profiles/Porteur/RendV/RendV";
 import SideBarProjet from "./Components/Profiles/Porteur/SideBarProjet/SideBarProjet";
 import ListeProjet from "./Components/Profiles/Porteur/ListeProjet/ListeProjet";
+import PorteurProfile from "./Components/Profiles/Porteur/PorteurProfile";
 
 function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -65,26 +65,27 @@ function App() {
           <Route path="freelance" element={<FreelanceFormulaire />} />
         </Route>
 
+         {/*Profiles routes */}
          {/* startup profile's routes */}
         <Route path="/profile/startup" element={<StartupProfile />}>
           <Route path="offres" element={<StartupOffres />} />
-          <Route path="evaluation" element={<EvaluationProjets />} />
+          <Route path="evaluation" element={< Evaluations/>} />
           <Route path="rendez-vous" element={<RendezVous />} />
-          <Route path="parametres" element={<Parametres />} />
+          <Route path="parametres" element={<ParametresPartenaire />} />
           <Route index element={<div>Dashboard Content</div>} />
         </Route>
          {/* investisseur profile's routes */}
         <Route path="/profile/investisseur" element={<InvestisseurProfile/>} >
           <Route path="ListeIdees" element={<ListeIdees />} />
-          <Route path="evaluation" element={<EvaluationProjets />} />
+          <Route path="evaluation" element={<Evaluations />} />
           <Route path="rendezVous" element={<RendezVouss />} />
-          <Route path="parametres" element={<Parametres />} />
+          <Route path="parametres" element={<ParametresPartenaire />} />
           <Route index element={<div>Dashboard Content</div>} />
         </Route>
         {/* freelancer profile's routes */}
         <Route path="/profile/freelance" element={<FreelanceProfile/>}>
           <Route path="listeProjetsFreelance" element={<ListeProjetsFreelance />} />
-          <Route path="parametres" element={<Parametres />} />
+          <Route path="parametres" element={<ParametresPartenaire />} />
           <Route index element={<div>Dashboard Content</div>} />
         </Route>
         {/* stagiaire profile's routes */}
@@ -104,19 +105,15 @@ function App() {
           <Route index element={<div>Dashboard Content</div>} />
         </Route>
         {/* porteur profile's routes */}
-        <Route path="/profile/porteur" element={<SideBarProjet />}>
+        <Route path="/profile/porteur" element={<PorteurProfile />}>
           <Route path="depose-projet" element={<DeposeProjet />} />
           <Route path="liste-projet" element={<ListeProjet />} />
           <Route path="rendv" element={<RendV />} />
-          <Route path="parametres" element={<Parametres />} />
+          <Route path="parametres" element={<ParametresPartenaire />} />
         </Route>
-        <Route path="depose-projet" element={<DeposeProjet />} />
         <Route path="liste-porteur" element={<ListePorteur />} />
-        <Route path="liste-projet" element={<ListeProjet />} />
-        <Route path="rendv" element={<RendV />} />
-    
       </Routes>
-      {/**  <FooterPage/> */} 
+     <FooterPage/> 
     </Router>
   );
 }
