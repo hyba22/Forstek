@@ -24,7 +24,7 @@ const ListeProjet = () => {
         action: 'refuse',
         refusedProjet: projet
       }
-    });
+    }); 
   };
 
   useEffect(() => {

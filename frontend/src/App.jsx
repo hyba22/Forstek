@@ -76,7 +76,7 @@ function App() {
         </Route>
          {/* investisseur profile's routes */}
         <Route path="/profile/investisseur" element={<InvestisseurProfile/>} >
-          <Route path="ListeIdees" element={<ListeIdees />} />
+          <Route path="ListeIdees" element={<ListeProjet />} />
           <Route path="evaluation" element={<Evaluations />} />
           <Route path="rendezVous" element={<RendezVouss />} />
           <Route path="parametres" element={<ParametresPartenaire />} />
@@ -98,7 +98,7 @@ function App() {
         </Route> 
         {/* partenaire profile's routes */}
         <Route path="/profile/partenaire" element={<PartenaireProfile />}>
-          <Route path="demande" element={<Demande />} />
+          <Route path="demande" element={<ListeProjet />} />
           <Route path="evaluation" element={<Evaluations />} />
           <Route path="rendez-vous" element={<RendezVousPartenaire />} />
           <Route path="parametres" element={<ParametresPartenaire />} />

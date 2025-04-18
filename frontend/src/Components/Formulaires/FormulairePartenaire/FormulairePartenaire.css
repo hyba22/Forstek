@@ -261,6 +261,16 @@ form.sign-in-form {
   pointer-events: all;
 }
 
+.form-error {
+  color: #ff3860;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  background-color: #ffebee;
+  border-radius: 4px;
+}
+
 @media (max-width: 870px) {
   .container {
     min-height: 800px;

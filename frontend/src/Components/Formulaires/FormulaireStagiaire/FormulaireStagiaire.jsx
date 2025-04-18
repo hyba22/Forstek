@@ -10,47 +10,158 @@ const FormulaireStagiaire = () => {
   const navigate = useNavigate();
   const [isSignUpMode, setIsSignUpMode] = useState(false);
   const { state } = useLocation();
+  
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     prenom: "",
     domaine: "",
-    role: state?.role || "stagiaire", 
+    role: state?.role || "stagiaire",
   });
   
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+    password: "",
+    prenom: "",
+    domaine: "",
+  });
+  
+  const [formError, setFormError] = useState("");
+
+  const validateField = (name, value) => {
+    let error = "";
+    
+    switch (name) {
+      case "email":
+        if (!value) {
+          error = "Email Est obligatoire";
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          error = "Entrez un email valide";
+        }
+        break;
+      case "password":
+        if (!value) {
+          error = "Mot de passe est obligatoire";
+        } else if (value.length < 8) {
+          error = "Il faut 8 caractères minimum";
+        } else if (!/[A-Z]/.test(value)) {
+          error = "Il faut au moins une lettre en majuscule";
+        } else if (!/[0-9]/.test(value)) {
+          error = "Il faut au moins un chiffre";
+        }
+        break;
+      case "name":
+        if (!value && isSignUpMode) {
+          error = "Nom est obligatoire";
+        } else if (value && !/^[a-zA-ZÀ-ÿ\s-]+$/.test(value)) {
+          error = "Il faut des lettres seulement";
+        }
+        break;
+      case "prenom":
+        if (!value && isSignUpMode) {
+          error = "Prénom est obligatoire";
+        } else if (value && !/^[a-zA-ZÀ-ÿ\s-]+$/.test(value)) {
+          error = "Il faut des lettres seulement";
+        }
+        break;
+      case "domaine":
+        if (!value && isSignUpMode) {
+          error = "Domaine est obligatoire";
+        }
+        break;
+      default:
+        break;
+    }
+    
+    return error;
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    
+    const error = validateField(name, value);
+    
+    setErrors({
+      ...errors,
+      [name]: error
+    });
+    
+    setFormData({ 
+      ...formData, 
+      [name]: value 
+    });
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    let isValid = true;
+    
+    Object.keys(formData).forEach(key => {
+      if (isSignUpMode || (key === "email" || key === "password")) {
+        const error = validateField(key, formData[key]);
+        newErrors[key] = error;
+        if (error) isValid = false;
+      }
+    });
+    
+    setErrors(newErrors);
+    return isValid;
   };
 
   const handleSignUp = async (e) => {
     e.preventDefault();
+    
+    if (!validateForm()) {
+      setFormError("Corrigez les erreurs du formulaire");
+      return;
+    }
+    
     try {
       const response = await signUp({
         ...formData,
         role: "stagiaire"
       });
+      
+      setFormData({
+        name: "",
+        email: "",
+        password: "",
+        prenom: "",
+        domaine: "",
+        role: "stagiaire",
+      });
+      
+      setFormError("");
       navigate("/stagiaire", { 
         state: { user: response.user } 
       });
     } catch (error) {
-      setError(error.message);
+      console.error("Signup error:", error);
+      setFormError(error.response?.data?.message || "Erreur. Réessayez de nouveau.");
     }
   };
 
   const handleSignIn = async (e) => {
     e.preventDefault();
+    
+    if (!validateForm()) {
+      setFormError("Entrez un email valide et votre mot de passe");
+      return;
+    }
+    
     try {
       const response = await signIn({
         email: formData.email,
         password: formData.password
-      })
-      navigate(`/${response.user.role.toLowerCase()}`); 
+      });
+      
+      setFormError("");
+      navigate(`/${response.user.role.toLowerCase()}`);
     } catch (error) {
-      setError(error.message);
+      console.error("Erreur de connexion:", error);
+      setFormError("Email ou mot de passe invalide. Réessayez.");
     }
   };
 
@@ -58,10 +169,9 @@ const FormulaireStagiaire = () => {
     <div className={`container ${isSignUpMode ? "sign-up-mode" : ""}`}>
       <div className="forms-container">
         <div className="signin-signup">
-          {/* Sign In Form */}
           <form onSubmit={handleSignIn} className="sign-in-form">
             <h2 className="title">Connexion Stagiaire</h2>
-            {/* Email Input */}
+            {formError && <div className="form-error">{formError}</div>}
             <div className="input-field">
               <MdEmail className="icon" />
               <input
@@ -72,8 +182,8 @@ const FormulaireStagiaire = () => {
                 onChange={handleInputChange}
                 required
               />
+              {errors.email && <span className="field-error">{errors.email}</span>}
             </div>
-            {/* Password Input */}
             <div className="input-field">
               <FaLock className="icon" />
               <input
@@ -84,17 +194,16 @@ const FormulaireStagiaire = () => {
                 onChange={handleInputChange}
                 required
               />
+              {errors.password && <span className="field-error">{errors.password}</span>}
             </div>
-            {error && <div className="error-message">{error}</div>}
             <button type="submit" className="btn solid">
               Se connecter
             </button>
           </form>
 
-          {/* Sign Up Form */}
           <form onSubmit={handleSignUp} className="sign-up-form">
             <h2 className="title">Inscription Stagiaire</h2>
-            {/* Name Input */}
+            {formError && <div className="form-error">{formError}</div>}
             <div className="input-field">
               <FaUser className="icon" />
               <input
@@ -105,8 +214,8 @@ const FormulaireStagiaire = () => {
                 onChange={handleInputChange}
                 required
               />
+              {errors.name && <span className="field-error">{errors.name}</span>}
             </div>
-            {/* First Name Input */}
             <div className="input-field">
               <FaUser className="icon" />
               <input
@@ -117,8 +226,8 @@ const FormulaireStagiaire = () => {
                 onChange={handleInputChange}
                 required
               />
+              {errors.prenom && <span className="field-error">{errors.prenom}</span>}
             </div>
-            {/* Domain Input */}
             <div className="input-field">
               <MdCastForEducation className="icon" />
               <input
@@ -129,8 +238,8 @@ const FormulaireStagiaire = () => {
                 onChange={handleInputChange}
                 required
               />
+              {errors.domaine && <span className="field-error">{errors.domaine}</span>}
             </div>
-            {/* Email Input */}
             <div className="input-field">
               <MdEmail className="icon" />
               <input
@@ -141,8 +250,8 @@ const FormulaireStagiaire = () => {
                 onChange={handleInputChange}
                 required
               />
+              {errors.email && <span className="field-error">{errors.email}</span>}
             </div>
-            {/* Password Input */}
             <div className="input-field">
               <FaLock className="icon" />
               <input
@@ -152,10 +261,10 @@ const FormulaireStagiaire = () => {
                 value={formData.password}
                 onChange={handleInputChange}
                 required
-                minLength={6}
+                minLength={8}
               />
+              {errors.password && <span className="field-error">{errors.password}</span>}
             </div>
-            {error && <div className="error-message">{error}</div>}
             <button type="submit" className="btn solid">
               S'inscrire
             </button>
@@ -163,7 +272,6 @@ const FormulaireStagiaire = () => {
         </div>
       </div>
 
-      {/* Toggle between sign in/up */}
       <div className="panels-container">
         <div className="panel left-panel">
           <div className="content">
@@ -171,7 +279,17 @@ const FormulaireStagiaire = () => {
             <p>Créez votre compte ici</p>
             <button
               className="btn transparent"
-              onClick={() => setIsSignUpMode(true)}
+              onClick={() => {
+                setIsSignUpMode(true);
+                setFormError("");
+                setErrors({
+                  name: "",
+                  email: "",
+                  password: "",
+                  prenom: "",
+                  domaine: "",
+                });
+              }}
             >
               S'inscrire
             </button>
@@ -184,7 +302,17 @@ const FormulaireStagiaire = () => {
             <p>Connectez-vous ici</p>
             <button
               className="btn transparent"
-              onClick={() => setIsSignUpMode(false)}
+              onClick={() => {
+                setIsSignUpMode(false);
+                setFormError("");
+                setErrors({
+                  name: "",
+                  email: "",
+                  password: "",
+                  prenom: "",
+                  domaine: "",
+                });
+              }}
             >
               Se connecter
             </button>

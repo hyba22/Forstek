@@ -20,7 +20,23 @@
   top: 0;
   left: 0;
 }
+.field-error {
+  color: #ff3860;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+  display: block;
+}
 
+.form-error {
+  color: #ff3860;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.input-field input:invalid {
+  border-color: #ff3860;
+}
 .signin-signup {
   position: absolute;
   top: 50%;
