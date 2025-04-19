@@ -191,7 +191,7 @@ const FormulairePartenaire = () => {
     }
     
     try {
-      const credentials = {
+      const credentials = { 
         email: formData.email,
         password: formData.password,
       };

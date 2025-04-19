@@ -33,7 +33,7 @@ const FormulaireStagiaire = () => {
   const validateField = (name, value) => {
     let error = "";
     
-    switch (name) {
+    switch (name) { 
       case "email":
         if (!value) {
           error = "Email Est obligatoire";
@@ -170,7 +170,7 @@ const FormulaireStagiaire = () => {
       <div className="forms-container">
         <div className="signin-signup">
           <form onSubmit={handleSignIn} className="sign-in-form">
-            <h2 className="title">Connexion Stagiaire</h2>
+            <h2 className="title">Connexion</h2>
             {formError && <div className="form-error">{formError}</div>}
             <div className="input-field">
               <MdEmail className="icon" />
@@ -294,6 +294,7 @@ const FormulaireStagiaire = () => {
               S'inscrire
             </button>
           </div>
+          <img src="/src/assets/1.png" className="image" alt="Usability Testing" />
         </div>
 
         <div className="panel right-panel">
@@ -317,6 +318,7 @@ const FormulaireStagiaire = () => {
               Se connecter
             </button>
           </div>
+          <img src="/src/assets/1.png" className="image" alt="Usability Testing" />
         </div>
       </div>
     </div>

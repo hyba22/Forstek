@@ -137,9 +137,14 @@ form.sign-in-form {
   transition: 0.5s;
 }
 
+.btn{
+  background-color: #f7911e;
+}
+
 .btn:hover {
   background-color: #4d84e2;
 }
+
 .panels-container {
   position: absolute;
   height: 100%;
@@ -207,7 +212,7 @@ form.sign-in-form {
   padding: 0.7rem 0;
 }
 
-.btn.transparent {
+.transparent {
   margin: 0;
   background: none;
   border: 2px solid #fff;

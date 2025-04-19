@@ -1,20 +1,37 @@
 import React, { useState } from "react";
 import styles from "./navbar.module.css";
-import { IoMenu } from "react-icons/io5";
+import { IoMenu, IoSearch } from "react-icons/io5";
 
 const Navbar = ({ onLoginClick, onSignUpClick }) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const handleRoleSelect = (role) => {
-    console.log("Selected role:", role);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchActive, setSearchActive] = useState(false);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    console.log("Searching for:", searchQuery);
+    // still search code with ai
   };
 
   return (
     <div className={styles.container}>
       <a className={styles.title} href="/">
-        <img className={styles.logo} src='/src/assets/logo3 copy.png' />
+        <img className={styles.logo} src="/src/assets/logo3 copy.png" />
       </a>
+      <div className={styles.searchContainer}>
+        <input
+          type="text"
+          placeholder="Search..."
+          className={styles.searchInput}
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <button type="submit" className={styles.searchButton}>
+          <IoSearch className={styles.searchIcon} />
+        </button>
+      </div>
       <div className={styles.menu}>
-        <IoMenu 
+        <IoMenu
           className={styles.menuBtn}
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Menu"
@@ -41,7 +58,7 @@ const Navbar = ({ onLoginClick, onSignUpClick }) => {
           </li>
           <li>
             <div className={styles.buttons}>
-              <button className={styles.btnSign} onClick={onSignUpClick} >
+              <button className={styles.btnSign} onClick={onSignUpClick}>
                 S'inscrire
               </button>
               <button className={styles.btnLog} onClick={onLoginClick}>
@@ -50,7 +67,7 @@ const Navbar = ({ onLoginClick, onSignUpClick }) => {
             </div>
           </li>
         </ul>
-      </div> 
+      </div>
     </div>
   );
 };

@@ -13,7 +13,7 @@ const LoginModal = ({ isOpen, onClose }) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setError('');
-    
+     
     try {
       const { token, role } = await signIn({ email, password });
       
@@ -72,6 +72,7 @@ const LoginModal = ({ isOpen, onClose }) => {
           </div>
           <div className={styles.btns}>
             <Button 
+              className={styles.btnStyle}
               variant="outlined" 
               type="submit" 
               color="primary"
@@ -79,6 +80,7 @@ const LoginModal = ({ isOpen, onClose }) => {
               Login
             </Button>
             <Button 
+            className={styles.btnStyle}
               variant="outlined" 
               color="error" 
               onClick={onClose}

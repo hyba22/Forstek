@@ -1,3 +1,10 @@
+.title {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+    color: #011224;
+}
+
 .carouselContainer {
     max-width: 1200px;
     margin: 0 auto;
@@ -51,4 +58,53 @@
     height: 12px;
     border-radius: 50%;
     margin: 0 5px;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+}
+
+.leftSide {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.rightSide {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;}
+
+.styleImg {
+    width: 550px;
+    margin: 2rem;
+}
+
+
+.paragraphe { 
+    width: 500px;
+    font-size: 21px;
+    font-weight: 500;
+    margin-right: 6rem;
+    
+}
+
+@media screen and (max-width: 830px){
+    .leftSide{
+        flex-direction: column;
+    }
+    .rightSide{
+        flex-direction: column;
+        
+    }
+    .paragraphe{
+        width: 300px;
+        display: flex;
+        align-self: center;
+        margin: 1rem;
+    }
+    .styleImg{
+        width: 80%;
+    }
 }
