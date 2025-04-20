@@ -18,11 +18,15 @@
     font-size: 2.5rem;
     color: #2c3e50;
     margin-bottom: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
   }
   
   .heroSection p {
     font-size: 1.2rem;
     color: #555;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
   }
   
   .contactGrid {
@@ -65,11 +69,15 @@
     color: #2c3e50;
     margin-bottom: 15px;
     font-size: 1.3rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
   }
   
   .contactCard p {
     margin: 8px 0;
     color: #555;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
   }
   
   .teamSection {
@@ -81,6 +89,8 @@
     color: #2c3e50;
     margin-bottom: 40px;
     font-size: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
   }
   
   .teamGrid {
@@ -119,11 +129,15 @@
     color: #2c3e50;
     margin-bottom: 10px;
     font-size: 1.2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
   }
   
   .teamMember p {
     margin: 8px 0;
     color: #555;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
   }
   
   .mapSection {
@@ -135,6 +149,8 @@
     color: #2c3e50;
     margin-bottom: 30px;
     font-size: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
   }
   
   .mapContainer {

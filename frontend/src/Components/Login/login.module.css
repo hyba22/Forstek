@@ -24,6 +24,7 @@
 
 .modal h2{
     color: #5995df;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 
@@ -38,6 +39,7 @@
 .textfield{
     margin-top: 6px !important;
     width: 350px !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .submitButton {
