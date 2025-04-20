@@ -2,7 +2,15 @@ import axios from "axios";
 
 const API_BASE_URL = "http://localhost:3000/api";
 const AUTH_URL = `${API_BASE_URL}/auth`;
+const PROJET_FREELANCE_URL = `${API_BASE_URL}/projet-freelance`;
 
+const api = axios.create({
+  baseURL: API_BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  withCredentials: true, 
+});
 export const getUsers = async () => {
   try {
     const response = await axios.get(`${API_BASE_URL}/users`);
@@ -40,7 +48,6 @@ export const createUser = async (user) => {
  
 export const signIn = async (loginDto) => {
   try {
-    // Ensure this is a POST request to the correct endpoint
     const response = await axios.post(`${AUTH_URL}/login`, loginDto, {
       withCredentials: true,
       headers: {
@@ -263,6 +270,77 @@ export const deleteDeposeProjet = async (iddeposeprojet) => {
     return response.data;
   } catch (error) {
     console.error(`Error deleting project ${iddeposeprojet}:`, error.response?.data || error.message);
+    throw error;
+  }
+};
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('accessToken');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+}, (error) => {
+  return Promise.reject(error);
+});
+
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      
+      window.location.href = '/login';
+    }
+    return Promise.reject(error);
+  }
+);
+
+// ProjetFreelance CRUD methods
+export const getProjetsFreelance = async () => {
+  try {
+    const response = await axios.get(`${PROJET_FREELANCE_URL}/`);
+    return response.data;
+  } catch (error) {
+    console.error("Error getting projects:", error.response?.data || error.message);
+    throw error;
+  }
+};
+
+export const createProjetFreelance = async (projectData) => {
+  try {
+    const response = await axios.post(`${PROJET_FREELANCE_URL}/`, projectData);
+    return response.data;
+  } catch (error) {
+    console.error("Error creating project:", error.response?.data || error.message);
+    throw error;
+  }
+};
+
+export const updateProjetFreelance = async (id, projectData) => {
+  try {
+    const response = await axios.put(`${PROJET_FREELANCE_URL}/${id}`, projectData);
+    return response.data;
+  } catch (error) {
+    console.error("Error updating project:", error.response?.data || error.message);
+    throw error;
+  }
+};
+
+export const deleteProjetFreelance = async (id) => {
+  try {
+    const response = await axios.delete(`${PROJET_FREELANCE_URL}/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting project:", error.response?.data || error.message);
+    throw error;
+  }
+};
+
+export const getProjetFreelanceByEmail = async (email) => {
+  try {
+    const response = await axios.get(`${PROJET_FREELANCE_URL}/by-email/${email}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error getting project by email:", error.response?.data || error.message);
     throw error;
   }
 };

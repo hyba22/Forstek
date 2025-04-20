@@ -9,7 +9,7 @@ const InvestisseurSideBar = () => {
     const toggleSidebar = () => {
       setCollapsed(!collapsed);
     };
-  
+  /*projetFreelance */
     return (
       <div className={`${styles.sideBar} ${collapsed ? styles.collapsed : ""}`}>
         <div className={styles.logoContainer}>
@@ -34,6 +34,10 @@ const InvestisseurSideBar = () => {
             <li className={location.pathname.includes("/ListeIdees") ? styles.active : ""}>
               <img src="/src/assets/job-offer.png" alt="job" className={styles.itemIcon}/>
               <NavLink to="ListeIdees">Liste des idées</NavLink>
+            </li>
+            <li className={location.pathname.includes("/projetFreelance") ? styles.active : ""}>
+              <img src="/src/assets/new-project.png" alt="job" className={styles.itemIcon}/>
+              <NavLink to="projetFreelance">Ajouter un projet</NavLink>
             </li>
             <li className={location.pathname.includes("/rendezVous") ? styles.active : ""}>
               <img src="/src/assets/calendar.png" alt="rdv" className={styles.itemIcon}/>

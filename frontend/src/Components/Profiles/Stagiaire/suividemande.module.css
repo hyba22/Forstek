@@ -83,3 +83,23 @@
   .modernTable tbody tr:nth-child(even):hover {
     background-color: #e9edf2;
   }
+  .loading {
+    padding: 20px;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+  }
+  
+  .error {
+    padding: 20px;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #ff4444;
+  }
+  
+  .descriptionCell {
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }

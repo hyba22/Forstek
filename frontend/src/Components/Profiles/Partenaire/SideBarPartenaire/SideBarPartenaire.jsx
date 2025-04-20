@@ -23,7 +23,7 @@ const SideBarPartenaire = () => {
       </div>
 
       <div className={styles.profileContainer}>
-        <img src="/src/assets/partenaire.jpg" alt="profile" className={styles.profileImage}/>
+        <img src="/src/assets/hiba.jpg" alt="profile" className={styles.profileImage}/>
         <div className={styles.profileContents}>
           <p className={styles.name}>Hello, partenaire</p>
           <p className={styles.email}>partenaire@gmail.com</p>

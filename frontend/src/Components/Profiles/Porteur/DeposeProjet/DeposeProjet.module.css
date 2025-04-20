@@ -14,7 +14,8 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-  }
+   
+  } 
   
   .jobFormContainer h2 { 
     text-align: center;
@@ -24,7 +25,10 @@
   .jobForm {
     display: flex;
     flex-direction: column;
-    margin-right: 7rem;
+    margin-right: 6rem;
+    justify-content: center;
+    align-items: center;
+    
   }
   
   .formGroup {
@@ -80,8 +84,9 @@
 
   .formActions {
   display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
+  flex-direction: row;
+  gap: 1.5rem;
+  justify-self: center;
 }
 
 .submitBtn {
@@ -91,6 +96,7 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  width: 120px;
 }
 
 .submitBtn:disabled {
@@ -105,6 +111,9 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  width: 120px;
+  height: 45px;
+  margin-top: 0.75rem;
 }
 
 .cancelBtn:disabled {

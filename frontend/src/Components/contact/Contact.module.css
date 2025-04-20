@@ -1,0 +1,171 @@
+.contactPage {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .heroSection {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+    border-radius: 10px;
+    margin-bottom: 40px;
+  }
+  
+  .heroSection h1 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+  }
+  
+  .heroSection p {
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  .contactGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+  }
+  
+  .contactCard {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .contactCard:hover {
+    transform: translateY(-5px);
+  }
+  
+  .iconCircle {
+    width: 70px;
+    height: 70px;
+    background: #3498db;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+  }
+  
+  .contactIcon {
+    color: white;
+    font-size: 1.8rem;
+  }
+  
+  .contactCard h3 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+  }
+  
+  .contactCard p {
+    margin: 8px 0;
+    color: #555;
+  }
+  
+  .teamSection {
+    margin-bottom: 50px;
+  }
+  
+  .teamSection h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 40px;
+    font-size: 2rem;
+  }
+  
+  .teamGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+  }
+  
+  .teamMember {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .memberPhoto {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .memberPhoto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  .teamMember h4 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+  }
+  
+  .teamMember p {
+    margin: 8px 0;
+    color: #555;
+  }
+  
+  .mapSection {
+    margin-bottom: 50px;
+  }
+  
+  .mapSection h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-size: 2rem;
+  }
+  
+  .mapContainer {
+    height: 400px;
+    background: #f5f7fa;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .mapContainer {
+    height: 400px;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  
+  @media (max-width: 768px) {
+    .heroSection {
+      padding: 40px 20px;
+    }
+    
+    .heroSection h1 {
+      font-size: 2rem;
+    }
+    
+    .contactGrid, .teamGrid {
+      grid-template-columns: 1fr;
+    }
+    
+    .mapContainer {
+      height: 300px;
+    }
+  }

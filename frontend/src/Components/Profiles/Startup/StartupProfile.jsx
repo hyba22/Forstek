@@ -21,7 +21,7 @@ const StartupProfile = () => {
           <Outlet />
         </div>
       </div>
-    </div>
+    </div> 
   );
 };
 

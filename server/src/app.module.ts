@@ -13,6 +13,8 @@ import { StagiaireModule } from './stagiaire/stagiaire.module';
 import { DemandeModule } from './demande/demande.module';
 import { EvaluationModule } from './evaluation/evaluation.module';
 import { DeposeprojetModule } from './deposeprojet/deposeprojet.module';
+import { ProjetFreelance } from './projetFreelance/projetFreelance.entity';
+import { ProjetFreelanceModule } from './projetFreelance/projet-freelance.module';
 
 @Module({
   imports: [
@@ -24,7 +26,7 @@ import { DeposeprojetModule } from './deposeprojet/deposeprojet.module';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities: [User, Demande],
+      entities: [User, Demande, ProjetFreelance],
       autoLoadEntities: true,
       synchronize: true, 
     }),
@@ -35,6 +37,7 @@ import { DeposeprojetModule } from './deposeprojet/deposeprojet.module';
     EvaluationModule,
     DemandeModule,
     DeposeprojetModule,
+    ProjetFreelanceModule,
   ],
   controllers: [AppController],
   providers: [AppService],

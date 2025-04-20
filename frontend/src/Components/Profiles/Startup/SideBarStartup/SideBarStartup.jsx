@@ -17,11 +17,11 @@ const SideBarStartup = () => {
         <img src="/src/assets/mission.gif" alt="icon" className={styles.logo} />
         <h2 className={styles.title}>Startup</h2>
       </div>
-
+ 
       <div className={styles.burgerContainer} onClick={toggleSidebar}>
         <div className={styles.burgerMenu}></div>
       </div>
-
+ 
       <div className={styles.profileContainer}>
         <img src="/src/assets/hiba.jpg" alt="profile" className={styles.profileImage}/>
         <div className={styles.profileContents}>
@@ -34,7 +34,7 @@ const SideBarStartup = () => {
         <ul>
           <li className={location.pathname.includes("/offres") ? styles.active : ""}>
             <img src="/src/assets/job-offer.png" alt="job" className={styles.itemIcon}/>
-            <NavLink to="offres">Offres de stage</NavLink>
+            <NavLink to="offres">Ajouter des Offres </NavLink>
           </li>
           <li className={location.pathname.includes("/rendez-vous") ? styles.active : ""}>
             <img src="/src/assets/calendar.png" alt="rdv" className={styles.itemIcon}/>

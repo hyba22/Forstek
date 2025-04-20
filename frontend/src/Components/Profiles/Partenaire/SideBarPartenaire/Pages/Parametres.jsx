@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { FiBell, FiDatabase, FiEdit2, FiLock, FiSave, FiSettings, FiUser, FiX } from 'react-icons/fi';
 import styles from './Parametres.module.css';
 
-// Schéma de configuration amélioré
 const SETTINGS_SCHEMA = {
   general: {
     label: "Général",
@@ -127,17 +126,14 @@ const Parametres = () => {
   const [originalSettings, setOriginalSettings] = useState({});
   const [currentTheme, setCurrentTheme] = useState('light');
 
-  // Initialisation des paramètres
   useEffect(() => {
     const initializeSettings = () => {
-      // Charger depuis localStorage si disponible
       const savedSettings = localStorage.getItem('appSettings');
       let initialSettings = {};
 
       if (savedSettings) {
         initialSettings = JSON.parse(savedSettings);
       } else {
-        // Créer des paramètres par défaut
         Object.keys(SETTINGS_SCHEMA).forEach(tab => {
           initialSettings[tab] = {};
           Object.keys(SETTINGS_SCHEMA[tab].fields).forEach(field => {
@@ -149,7 +145,6 @@ const Parametres = () => {
       setSettings(initialSettings);
       setOriginalSettings(JSON.parse(JSON.stringify(initialSettings)));
       
-      // Appliquer le thème
       applyTheme(initialSettings.general?.theme || 'light');
       setIsLoading(false);
     };
@@ -157,7 +152,6 @@ const Parametres = () => {
     initializeSettings();
   }, []);
 
-  // Appliquer le thème sélectionné
   const applyTheme = (theme) => {
     let themeToApply = theme;
     
@@ -169,7 +163,6 @@ const Parametres = () => {
     document.documentElement.setAttribute('data-theme', themeToApply);
     localStorage.setItem('theme', themeToApply);
     
-    // Ajouter/supprimer la classe darkMode sur le body
     if (themeToApply === 'dark') {
       document.body.classList.add('darkMode');
     } else {
@@ -177,7 +170,6 @@ const Parametres = () => {
     }
   };
 
-  // Gérer les changements de préférence système pour le thème
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handler = () => {
@@ -201,7 +193,6 @@ const Parametres = () => {
 
     setSettings(newSettings);
 
-    // Appliquer immédiatement les changements de thème
     if (tab === 'general' && field === 'theme') {
       applyTheme(value);
     }
@@ -211,7 +202,6 @@ const Parametres = () => {
     e.preventDefault();
     setIsLoading(true);
     
-    // Simuler une sauvegarde asynchrone
     setTimeout(() => {
       // Sauvegarder dans localStorage
       localStorage.setItem('appSettings', JSON.stringify(settings));
@@ -226,7 +216,6 @@ const Parametres = () => {
     setSettings(JSON.parse(JSON.stringify(originalSettings)));
     setEditMode(false);
     
-    // Restaurer le thème précédent
     if (originalSettings.general?.theme) {
       applyTheme(originalSettings.general.theme);
     }

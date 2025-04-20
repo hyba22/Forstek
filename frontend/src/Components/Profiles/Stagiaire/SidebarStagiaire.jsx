@@ -27,28 +27,28 @@ const SidebarStagiaire = ({ collapsed, setCollapsed }) => {
         <p className={styles.email}>jass@gmail.com</p>
       </div>
     </div>
-
+ 
       <div className={styles.contentsContainer}>
         <ul>
-          <li className={location.pathname.includes("/stagiaire-profile/suivi-demande") ? styles.active : ""}>
+          <li className={location.pathname.includes("suivi-demande") ? styles.active : ""}>
             <img src="/src/assets/Demande.png" alt="suivi" className={styles.itemIcon} />
-            <NavLink to="/stagiaire-profile/suivi-demande">Suivi de demande</NavLink>
+            <NavLink to="suivi-demande">Suivi de demande</NavLink>
           </li>
-          <li className={location.pathname.includes("/offres-disponibles") ? styles.active : ""}>
+          <li className={location.pathname.includes("offres-dispo") ? styles.active : ""}>
             <img src="/src/assets/job-offer.png" alt="offres" className={styles.itemIcon} />
-            <NavLink to="/offres-disponibles">Offres disponibles</NavLink>
+            <NavLink to="offres-dispo">Offres disponibles</NavLink>
           </li>
-          <li className={location.pathname.includes("/rendez-vous") ? styles.active : ""}>
+          <li className={location.pathname.includes("rendez-vous") ? styles.active : ""}>
             <img src="/src/assets/calendar.png" alt="rdv" className={styles.itemIcon}/>
             <NavLink to="rendez-vous">Rendez-vous</NavLink>
           </li>
-          <li className={location.pathname.includes("/stagiaire-profile/parametres") ? styles.active : ""}>
+          <li className={location.pathname.includes("parametres") ? styles.active : ""}>
             <img src="/src/assets/settings.png" alt="parametres" className={styles.itemIcon} />
-            <NavLink to="/stagiaire-profile/parametres">Paramètres</NavLink>
+            <NavLink to="parametres">Paramètres</NavLink>
           </li>
-          <li className={location.pathname.includes("/stagiaire-profile/deconnexion") ? styles.active : ""}>
-            <img src="/src/assets/logout.png" alt="deconnexion" className={styles.itemIcon} />
-            <NavLink to="/stagiaire-profile/deconnexion">Déconnexion</NavLink>
+          <li>
+            <img src="/src/assets/logout.png" alt="deconnexion" className={styles.itemIcon}/>
+            <NavLink to="/">Déconnexion</NavLink>
           </li>
         </ul>
       </div>

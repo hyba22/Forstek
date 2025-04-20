@@ -6,7 +6,7 @@ const SuiviDemande = () => {
   const [demandes, setDemandes] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
+  useEffect(() => { 
     const token = localStorage.getItem('token');
     if (!token) {
       alert('Veuillez vous connecter');

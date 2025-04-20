@@ -18,7 +18,7 @@ const DeposeProjet = () => {
     moyens: "",
     datedebut: "",
     datefin: ""
-  });
+  }); 
 
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);

@@ -14,7 +14,7 @@ const FreelanceSideBar = () => {
     <div className={`${styles.sideBar} ${collapsed ? styles.collapsed : ""}`}>
       <div className={styles.logoContainer}>
         <img src="/src/assets/mission.gif" alt="icon" className={styles.logo} />
-        <h2 className={styles.title}>Investisseur</h2>
+        <h2 className={styles.title}>Freelance</h2>
       </div>
 
       <div className={styles.burgerContainer} onClick={toggleSidebar}>

@@ -15,7 +15,7 @@ const Evaluations = () => {
   const [partners, setPartners] = useState([]);
   const [formData, setFormData] = useState({
     projectId: '',
-    partnerId: '', // On garde seulement partnerId
+    partnerId: '', 
     comments: '',
     innovationStars: 3,
     marketPotentialStars: 3,
@@ -43,7 +43,7 @@ const Evaluations = () => {
         projectName: demande.name || `Projet ${demande._id || demande.id}`
       }));
       
-      return { projects: projectsList, partners: [] }; // On ne charge plus les partenaires
+      return { projects: projectsList, partners: [] }; 
     } catch (err) {
       console.error('Erreur chargement demandes:', err);
       setError(err.message || "Erreur lors du chargement des demandes.");
@@ -124,7 +124,7 @@ const Evaluations = () => {
       const payload = {
         ...formData,
         score: formData.overallStars * 20,
-        partnerName: formData.partnerId // On utilise l'ID comme nom pour la compatibilité
+        partnerName: formData.partnerId 
       };
 
       let response;
@@ -252,7 +252,7 @@ const Evaluations = () => {
   };
 
   const getPartnerName = (id) => {
-    return `Évaluateur (ID: ${id})`; // On affiche simplement l'ID
+    return `Évaluateur (ID: ${id})`; 
   };
 
   return (

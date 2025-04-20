@@ -13,7 +13,7 @@ const roleOptions = [
   { label: "Startup", value: "startup" },
   { label: "Partenaire", value: "partenaire" },
   { label: "Freelance", value: "freelance" },
-];
+]; 
 
 const SignUpModal = ({ isOpen, onClose }) => {
   const [selectedRole, setSelectedRole] = useState("porteur_de_projet");
@@ -57,10 +57,10 @@ const SignUpModal = ({ isOpen, onClose }) => {
         </FormControl>
 
         <div className={styles.btns}>
-          <Button onClick={handleSignUp} variant="outlined" color="primary">
+          <Button className={styles.btnStyle} onClick={handleSignUp} variant="outlined" color="primary">
             S'inscrire
           </Button>
-          <Button onClick={onClose} variant="outlined" color="danger">
+          <Button className={styles.btnStyle} onClick={onClose} variant="outlined" color="danger">
             Fermer
           </Button>
         </div>

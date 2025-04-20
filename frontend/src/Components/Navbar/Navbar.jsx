@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import styles from "./navbar.module.css";
 import { IoMenu, IoSearch } from "react-icons/io5";
+import { NavLink, useLocation } from "react-router-dom";
 
 const Navbar = ({ onLoginClick, onSignUpClick }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchActive, setSearchActive] = useState(false);
+  const location = useLocation();
 
-  const handleSearch = (e) => {
+  const handleSearch = (e) => { 
     e.preventDefault();
     console.log("Searching for:", searchQuery);
     // still search code with ai
@@ -41,21 +43,15 @@ const Navbar = ({ onLoginClick, onSignUpClick }) => {
           className={`${styles.menuItems} ${menuOpen ? styles.menuOpen : ""}`}
           onClick={() => setMenuOpen(false)}
         >
-          <li>
-            <a className={styles.menuItem} href="/">
-              Accueil
-            </a>
-          </li>
-          <li>
-            <a className={styles.menuItem} href="/contact">
-              Contact us
-            </a>
-          </li>
-          <li>
-            <a className={styles.menuItem} href="">
-              Nos équipes
-            </a>
-          </li>
+          <li className={location.pathname.includes("/") ? styles.active : ""}>
+            <NavLink to="/">Accueil</NavLink>
+           </li>
+           <li className={location.pathname.includes("contact") ? styles.active : ""}>
+            <NavLink to="contact">Contact</NavLink>
+           </li>
+           <li className={location.pathname.includes("/") ? styles.active : ""}>
+            <NavLink to="/">Nos équipes</NavLink>
+           </li>
           <li>
             <div className={styles.buttons}>
               <button className={styles.btnSign} onClick={onSignUpClick}>

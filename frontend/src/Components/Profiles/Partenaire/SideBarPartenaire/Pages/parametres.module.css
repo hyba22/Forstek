@@ -248,7 +248,6 @@ input:checked + .slider:before {
   100% { background-position: -200% 0; }
 }
 
-/* Dark mode styles */
 .container.darkMode {
   background-color: #1a202c;
   color: #e2e8f0;
@@ -321,7 +320,6 @@ input:checked + .slider:before {
   background-color: #63b3ed;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .container {
     padding: 1rem;

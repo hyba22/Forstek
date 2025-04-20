@@ -11,7 +11,7 @@
     position: relative; 
     transition: all 0.3s ease;
 }
-
+ 
 .sideBar {
     background-color: rgb(255, 255, 255);
     width: 274px;
@@ -29,7 +29,7 @@
 }
 
 .body {
-    background: #eceaea;
+    background: rgb(255, 255, 255);
     flex: 1;
     height: 100vh;
     overflow-y: auto;

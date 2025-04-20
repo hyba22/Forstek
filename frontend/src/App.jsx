@@ -36,6 +36,8 @@ import RendV from "./Components/Profiles/Porteur/RendV/RendV";
 import SideBarProjet from "./Components/Profiles/Porteur/SideBarProjet/SideBarProjet";
 import ListeProjet from "./Components/Profiles/Porteur/ListeProjet/ListeProjet";
 import PorteurProfile from "./Components/Profiles/Porteur/PorteurProfile";
+import AjoutProjetFreelance from "./Components/Profiles/Investisseur/InvestisseurSidebar/Pages/AjoutProjetFreelance";
+import OffreDispo from "./Components/Profiles/Stagiaire/OffreDispo";
 
 function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -78,6 +80,7 @@ function App() {
         <Route path="/profile/investisseur" element={<InvestisseurProfile/>} >
           <Route path="ListeIdees" element={<ListeProjet />} />
           <Route path="evaluation" element={<Evaluations />} />
+          <Route path="projetFreelance" element={<AjoutProjetFreelance />} />
           <Route path="rendezVous" element={<RendezVouss />} />
           <Route path="parametres" element={<ParametresPartenaire />} />
           <Route index element={<div>Dashboard Content</div>} />
@@ -92,7 +95,8 @@ function App() {
         <Route path="/profile/stagiaire" element={<StagiaireProfile />}>
           <Route index element={<AccueilStagiaire />} />
           <Route path="suivi-demande" element={<SuiviDemande />} />
-          <Route path="parametres" element={<Parametres />} />
+          <Route path="offres-dispo" element={<OffreDispo />} /> 
+          <Route path="parametres" element={<ParametresPartenaire />} />
           <Route path="deconnexion" element={<Deconnexion />} />
           <Route path="rendez-vous" element={<RendezVous />} />
         </Route> 

@@ -134,7 +134,7 @@ const FormulaireStagiaire = () => {
       });
       
       setFormError("");
-      navigate("/stagiaire", { 
+      navigate("/profile/stagiaire", { 
         state: { user: response.user } 
       });
     } catch (error) {
