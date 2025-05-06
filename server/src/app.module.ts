@@ -29,7 +29,7 @@ import { CloudflareModule } from './cloudflare/cloudflare.module';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities: [User, Demandes, ProjetFreelance, Offre], // Removed EvaluationModule, DeposeprojetModule
+      entities: [User, Demandes, ProjetFreelance, Offre], 
       autoLoadEntities: true,
       synchronize: true,
     }),

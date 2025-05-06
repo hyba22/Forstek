@@ -196,41 +196,41 @@ const OffreDispo = () => {
 
   const handleAIExecution = async () => {
     if (!applicationData.cv || !selectedOffer) {
-      alert('Veuillez uploader un CV et sélectionner une offre.');
+      setAiError('Veuillez uploader un CV et sélectionner une offre.');
       return;
     }
-  
+
     const aiQuestions = {
       goodFit: 'Suis-je un bon candidat ?',
-      tailorResume: 'Quels sont les points à améliorer dans mon CV ?',
+      tailorResume: 'Adapter mon CV',
       bestPositioning: 'Comment puis-je me positionner au mieux ?',
     };
-  
+
     const activeQuestions = Object.keys(aiAssistant)
       .filter((key) => aiAssistant[key])
       .map((key) => aiQuestions[key]);
-  
+
     if (activeQuestions.length === 0) {
-      alert('Veuillez sélectionner au moins une option IA.');
+      setAiError('Veuillez sélectionner au moins une option IA.');
       return;
     }
-  
+
     setLoading(true);
     setAiError(null);
-  
+
     try {
       const jobOfferFile = new File(
         [JSON.stringify({ description: selectedOffer.description })],
         'jobOffer.json',
         { type: 'application/json' },
       );
-  
+
       console.log('Submitting AI request:', {
         resumeFile: applicationData.cv.name,
         jobOfferFile: jobOfferFile.name,
         questions: activeQuestions,
       });
-  
+
       const responses = {};
       for (const question of activeQuestions) {
         const result = await executeAIAssistant({
@@ -238,14 +238,18 @@ const OffreDispo = () => {
           jobOfferFile,
           question,
         });
-        // Extract the response string from the nested response object
-        const responseText = result.response?.response || 'Réponse non disponible';
+        // Extract the response string and trim "Cordialement, [Your Name]"
+        let responseText = result.response?.response || 'Réponse non disponible';
+        const salutationIndex = responseText.toLowerCase().lastIndexOf('cordialement');
+        if (salutationIndex !== -1) {
+          responseText = responseText.substring(0, salutationIndex).trim();
+        }
         console.log(`AI response for "${question}":`, responseText);
         responses[
           Object.keys(aiQuestions).find((key) => aiQuestions[key] === question)
-        ] = responseText; // Store only the string
+        ] = responseText;
       }
-  
+
       setAiResponses((prev) => ({ ...prev, ...responses }));
     } catch (error) {
       console.error('Error with AI Assistant:', error);
@@ -256,6 +260,7 @@ const OffreDispo = () => {
       setLoading(false);
     }
   };
+
   const customStyles = {
     content: {
       top: '50%',
@@ -434,13 +439,10 @@ const OffreDispo = () => {
                         <p>{aiResponses.bestPositioning}</p>
                       </div>
                     )}
-                  </div>
 
-                  {aiError && (
-                    <div className={styles.aiError}>
-                      <p>{aiError}</p>
-                    </div>
-                  )}
+                    {/* Display aiError here */}
+                    {aiError && <div className={styles.aiError}>{aiError}</div>}
+                  </div>
 
                   <button
                     className={styles.aiButton}

@@ -31,7 +31,7 @@ export default {
 		  return new Response('Le prompt est requis', { status: 400 });
 		}
   
-		const frenchPrompt = `Répondez en français de manière détaillée et professionnelle. ${prompt}`;
+		const frenchPrompt = `Répondez en français de manière plus au moins détaillée et professionnelle. ${prompt}`;
   
 		const response = await env.AI.run('@cf/meta/llama-3-8b-instruct', {
 		  prompt: frenchPrompt,

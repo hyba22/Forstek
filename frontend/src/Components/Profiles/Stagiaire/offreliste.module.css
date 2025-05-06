@@ -6,6 +6,7 @@
     color: #333;
   }
   
+  
   .backButtonContainer {
     margin-bottom: 20px;
   }
@@ -229,7 +230,15 @@
   color: #2c3e50;
   font-size: 16px;
 }
-
+.aiError {
+  color: #d32f2f; 
+  font-size: 14px;
+  margin-top: 10px;
+  padding: 8px;
+  background-color: #ffebee; 
+  border-radius: 4px;
+  text-align: center;
+}
 .aiFeatures {
   display: flex;
   flex-direction: column;
@@ -360,7 +369,7 @@
 .applyButton:hover {
   background-color: #2980b9;
 }
-
+/*
 .aiResponse {
   margin-top: 8px;
   padding: 10px;
@@ -369,6 +378,19 @@
   border: 1px solid #ddd;
   font-size: 14px;
   color: #333;
+}*/
+.aiResponse {
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 15px;
+  margin-top: 10px;
+  max-height: 500px; 
+  overflow-y: auto; 
+  white-space: pre-wrap; 
+  word-wrap: break-word; 
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 /* Responsive adjustments */
