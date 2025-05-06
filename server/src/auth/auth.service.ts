@@ -97,12 +97,12 @@ async login(loginDto: LoginDto): Promise<{ token: string; role: string }> {
 
   const user = await this.usersRepository.findOne({ where: { email } });
   if (!user) {
-    throw new UnauthorizedException('Invalid email or password');
+    throw new UnauthorizedException('Email ou mot de passe invalide');
   }
 
   const isPasswordMatched = await bcrypt.compare(password, user.password);
   if (!isPasswordMatched) {
-    throw new UnauthorizedException('Invalid email or password');
+    throw new UnauthorizedException('Email ou mot de passe invalide');
   }
 
   const token = this.jwtService.sign({ 

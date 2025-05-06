@@ -103,3 +103,31 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
+  /*adding style*/
+  .statusBadge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+  
+  .en_attente {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+  
+  .en_cours {
+    background-color: #cce5ff;
+    color: #004085;
+  }
+  
+  .acceptee {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .refusee {
+    background-color: #f8d7da;
+    color: #721c24;
+  }

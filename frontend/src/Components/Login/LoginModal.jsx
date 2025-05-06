@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from './login.module.css';
 import { Button, TextField } from "@mui/material";
+import { FaTimes } from "react-icons/fa"; 
 import { signIn } from "../../Components/Services/userService";
 
 const LoginModal = ({ isOpen, onClose }) => {
@@ -22,7 +23,7 @@ const LoginModal = ({ isOpen, onClose }) => {
       redirectToDashboard(role);
       onClose();
     } catch (err) {
-      setError(err.message || 'Login failed. Please try again.');
+      setError(err.message || 'Erreur, Réessayez.');
     }
   };
 
@@ -44,7 +45,16 @@ const LoginModal = ({ isOpen, onClose }) => {
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modal}>
-        <h2>Login</h2>
+      <button 
+            className={styles.closeButton} 
+            onClick={onClose}
+            aria-label="close"
+          >
+            <FaTimes />
+          </button>
+        <div className={styles.modalHeader}>
+          <h2>Connexion</h2>
+        </div>
         {error && <div className={styles.error}>{error}</div>}
         <form onSubmit={handleLogin}>
           <div className={styles.formGroup}>
@@ -62,7 +72,7 @@ const LoginModal = ({ isOpen, onClose }) => {
             <TextField
               className={styles.textfield}
               type="password"
-              label="Password"
+              label="Mot de passe"
               variant="outlined"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -77,15 +87,7 @@ const LoginModal = ({ isOpen, onClose }) => {
               type="submit" 
               color="primary"
             >
-              Login
-            </Button>
-            <Button 
-            className={styles.btnStyle}
-              variant="outlined" 
-              color="error" 
-              onClick={onClose}
-            >
-              Close
+              Se connecter
             </Button>
           </div>
         </form>

@@ -5,6 +5,8 @@ import FormControl from "@mui/joy/FormControl";
 import Radio from "@mui/joy/Radio";
 import RadioGroup from "@mui/joy/RadioGroup";
 import Button from "@mui/joy/Button";
+import { FaTimes } from "react-icons/fa"; 
+
 
 const roleOptions = [
   { label: "Porteur de projet", value: "porteur" },
@@ -13,7 +15,7 @@ const roleOptions = [
   { label: "Startup", value: "startup" },
   { label: "Partenaire", value: "partenaire" },
   { label: "Freelance", value: "freelance" },
-]; 
+];
 
 const SignUpModal = ({ isOpen, onClose }) => {
   const [selectedRole, setSelectedRole] = useState("porteur_de_projet");
@@ -23,18 +25,24 @@ const SignUpModal = ({ isOpen, onClose }) => {
     setSelectedRole(event.target.value);
   };
 
- 
   const handleSignUp = () => {
     onClose();
     navigate(`/signup/${selectedRole}`, {
-      state: { role: selectedRole }  
+      state: { role: selectedRole },
     });
   };
-  
+
   if (!isOpen) return null;
 
   return (
     <div className={styles.section}>
+      <button
+        className={styles.closeButton}
+        onClick={onClose}
+        aria-label="close"
+      >
+        <FaTimes />
+      </button>
       <h2>Choisissez votre rôle</h2>
       <div className={styles.roles}>
         <FormControl>
@@ -45,7 +53,7 @@ const SignUpModal = ({ isOpen, onClose }) => {
           >
             {roleOptions.map((option) => (
               <div key={option.value} className={styles.roleOption}>
-                <Radio 
+                <Radio
                   value={option.value}
                   variant="outlined"
                   checked={selectedRole === option.value}
@@ -57,11 +65,13 @@ const SignUpModal = ({ isOpen, onClose }) => {
         </FormControl>
 
         <div className={styles.btns}>
-          <Button className={styles.btnStyle} onClick={handleSignUp} variant="outlined" color="primary">
+          <Button
+            className={styles.btnStyle}
+            onClick={handleSignUp}
+            variant="outlined"
+            color="primary"
+          >
             S'inscrire
-          </Button>
-          <Button className={styles.btnStyle} onClick={onClose} variant="outlined" color="danger">
-            Fermer
           </Button>
         </div>
       </div>

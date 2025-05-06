@@ -1,39 +1,28 @@
-import { IsEmail, IsNotEmpty, IsOptional, IsString, IsUrl } from 'class-validator';
+import { IsNumber, IsString, IsEmail, IsNotEmpty, IsOptional, IsEnum, IsInt, IsNumberString } from 'class-validator';
+import { StatutDemande } from './statut-demande.enum';
 
 export class CreateDemandeDto {
-  @IsNotEmpty()
-  @IsString()
-  nomProjet: string;
 
-  @IsNotEmpty()
-  @IsString()
-  nomPorteur: string;
+  @IsNumberString()
+  offreId: number;
 
+  @IsString()
   @IsNotEmpty()
+  name: string;
+
   @IsEmail()
+  @IsNotEmpty()
   email: string;
 
+  @IsString()
+  @IsOptional()
+  lettreMotivation?: string;
+
+  @IsString()
   @IsNotEmpty()
-  @IsString()
-  description: string;
+  cv?: string;
 
   @IsOptional()
-  @IsString()
-  secteurActivite?: string;
-
-  @IsOptional()
-  @IsString()
-  stadeDeveloppement?: string;
-
-  @IsOptional()
-  @IsUrl()
-  siteWeb?: string;
-
-  @IsOptional()
-  @IsString()
-  besoins?: string;
-
-  @IsOptional()
-  @IsString()
-  equipe?: string;
+  @IsEnum(StatutDemande)
+  statut?: StatutDemande;
 }

@@ -162,6 +162,8 @@ export const updateDemandeStatus = async (id, statut) => {
   }
 };
 
+
+
 export const deleteDemande = async (id) => {
   try {
     const response = await axios.delete(`${API_BASE_URL}/demandes/${id}`);
@@ -300,7 +302,7 @@ export const getProjetsFreelance = async () => {
     const response = await axios.get(`${PROJET_FREELANCE_URL}/`);
     return response.data;
   } catch (error) {
-    console.error("Error getting projects:", error.response?.data || error.message);
+    console.error("Erreur lors de l''affichage:", error.response?.data || error.message);
     throw error;
   }
 };
@@ -310,7 +312,7 @@ export const createProjetFreelance = async (projectData) => {
     const response = await axios.post(`${PROJET_FREELANCE_URL}/`, projectData);
     return response.data;
   } catch (error) {
-    console.error("Error creating project:", error.response?.data || error.message);
+    console.error("Erreur lors de la création:", error.response?.data || error.message);
     throw error;
   }
 };
@@ -320,7 +322,7 @@ export const updateProjetFreelance = async (id, projectData) => {
     const response = await axios.put(`${PROJET_FREELANCE_URL}/${id}`, projectData);
     return response.data;
   } catch (error) {
-    console.error("Error updating project:", error.response?.data || error.message);
+    console.error("Erreur lors de la mise à jour:", error.response?.data || error.message);
     throw error;
   }
 };
@@ -330,7 +332,7 @@ export const deleteProjetFreelance = async (id) => {
     const response = await axios.delete(`${PROJET_FREELANCE_URL}/${id}`);
     return response.data;
   } catch (error) {
-    console.error("Error deleting project:", error.response?.data || error.message);
+    console.error("Erreur lors de la suppression:", error.response?.data || error.message);
     throw error;
   }
 };
@@ -340,9 +342,228 @@ export const getProjetFreelanceByEmail = async (email) => {
     const response = await axios.get(`${PROJET_FREELANCE_URL}/by-email/${email}`);
     return response.data;
   } catch (error) {
-    console.error("Error getting project by email:", error.response?.data || error.message);
+    console.error("Erreur lors de l'importation du projet par mail:", error.response?.data || error.message);
     throw error;
   }
 };
 
 
+// Add demande funstions 
+
+export const createDemandes = async (demandeData) => {
+  try {
+    const token = localStorage.getItem('token');
+    const response = await axios.post(`${API_BASE_URL}/demandes/apply`, {
+      ...demandeData,
+      offreId: demandeData.offreId, 
+      name: demandeData.name?.split(' ')[0] || '', 
+      prenom: demandeData.prenom?.split(' ').slice(1).join(' ') || '', 
+    }, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Create Demande Error:", error.response?.data || error.message);
+    throw error;
+  }
+};
+/*
+export const uploadCV = async (file, offerId) => {
+  try {
+    const token = localStorage.getItem('token');
+    const formData = new FormData();
+    formData.append('cv', file);
+    formData.append('offerId', offerId);
+
+    const response = await axios.post(`${API_BASE_URL}/demandes/upload-cv`, formData, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Upload CV Error:", error.response?.data || error.message);
+    throw error;
+  }
+};*/
+/*
+export const uploadCV = async (cvFile) => {
+  const formData = new FormData();
+  formData.append('cv', cvFile);
+  try {
+    const response = await api.post('/demandes/upload-cv', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("API Error:", error.response?.data || error.message);
+    throw error;
+  }
+};
+*/
+
+export const uploadCV = async (file) => {
+  const formData = new FormData();
+  formData.append('cv', file);
+  const response = await axios.post('http://localhost:3000/api/upload-cv', formData);
+  return response.data;
+};
+
+export const getOfferDetails = async (offerId) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/offers/${offerId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Get Offer Error:", error.response?.data || error.message);
+    throw error;
+  }
+};
+
+/*
+export const getDemandesWithOffers = async () => {
+  
+  try {
+    const response = await fetch(`${API_BASE_URL}/demandes/with-offers`, {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const result = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(result.message || 'Request failed');
+    }
+
+    if (!result.success) {
+      throw new Error(result.message || 'API request unsuccessful');
+    }
+
+    return result.data;
+  } catch (error) {
+    console.error('API Error:', error);
+    throw new Error(error.message || 'Failed to fetch applications');
+  }
+};*/
+
+/*
+export const getDemandesWithOffers = async () => {
+ 
+  
+  try {
+    const response = await fetch(`${API_BASE_URL}/demandes/with-offers`, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json'
+      },
+      credentials: 'include'
+    });
+
+    
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('API Error Response:', errorText);
+      throw new Error(errorText || 'Request failed with status ' + response.status);
+    }
+
+    
+    const contentType = response.headers.get('content-type');
+    if (!contentType?.includes('application/json')) {
+      const text = await response.text();
+      throw new Error(`Expected JSON but got: ${contentType}. Response: ${text.substring(0, 100)}`);
+    }
+
+    const data = await response.json();
+    console.log('API Response:', data); 
+    
+    
+    return data.map(item => ({
+      id: item.demande_id,
+      dateDemande: item.demande_dateDemande,
+      statut: item.demande_statut,
+      offre: {
+        id: item.offre_id,
+        titre: item.offre_titre,
+        societe: item.offre_societe
+      }
+    }));
+  } catch (error) {
+    console.error('Full API Error:', error);
+    throw new Error(error.message || 'Failed to fetch applications');
+  }
+};*/
+
+export const getDemandesWithOffers = async () => {
+  try {
+    const url = 'http://localhost:3000/api/demandes/fetch-with-offers';
+    console.log('Sending request to:', url);
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    console.log('Response status:', response.status);
+    console.log('Response headers:', [...response.headers.entries()]);
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error('Error response data:', errorData);
+      throw new Error(JSON.stringify(errorData));
+    }
+    const data = await response.json();
+    console.log('Response data:', data);
+    return data;
+  } catch (error) {
+    console.error('Fetch error:', error);
+    throw error;
+  }
+};
+
+///// AI assictance 
+export const executeAIAssistant = async ({ resumeFile, jobOfferFile, question }) => {
+  const formData = new FormData();
+
+  if (!resumeFile) {
+    throw new Error('Resume file is missing');
+  }
+  if (!(resumeFile instanceof File)) {
+    console.error('Invalid resume file type:', resumeFile);
+    throw new Error('Resume file must be a valid File object');
+  }
+  formData.append('files', resumeFile, 'resume.pdf');
+
+  if (!jobOfferFile) {
+    throw new Error('Job offer file is missing');
+  }
+  if (!(jobOfferFile instanceof File)) {
+    console.error('Invalid job offer file type:', jobOfferFile);
+    throw new Error('Job offer file must be a valid File object');
+  }
+  formData.append('files', jobOfferFile, 'jobOffer.json');
+
+  if (!question || typeof question !== 'string') {
+    throw new Error('Question must be a non-empty string');
+  }
+  formData.append('question', question);
+
+  for (let [key, value] of formData.entries()) {
+    console.log(`FormData entry: ${key}=${value.name || value}`);
+  }
+
+  try {
+    const response = await axios.post('http://localhost:3000/api/analyze', formData);
+    return response.data;
+  } catch (error) {
+    console.error('Error with AI Assistant:', error);
+    throw error;
+  }
+};

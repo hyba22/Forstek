@@ -1,6 +1,8 @@
 .globalContainer{
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  scroll: none;
 }
 
 .jobFormContainer {
@@ -157,7 +159,7 @@
   background-color: #f44336;
   color: white;
   border: none;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1rem; 
   border-radius: 4px;
   cursor: pointer;
 }

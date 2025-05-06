@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -8,13 +8,16 @@ import { UsersModule } from './users/users.module';
 import { OffresModule } from './offres/offres.module';
 import { Offre } from './offres/offre.entity';
 import { ConfigModule } from '@nestjs/config';
-import Demande from './stagiaire/demande.entity';
 import { StagiaireModule } from './stagiaire/stagiaire.module';
 import { DemandeModule } from './demande/demande.module';
 import { EvaluationModule } from './evaluation/evaluation.module';
 import { DeposeprojetModule } from './deposeprojet/deposeprojet.module';
 import { ProjetFreelance } from './projetFreelance/projetFreelance.entity';
 import { ProjetFreelanceModule } from './projetFreelance/projet-freelance.module';
+import { Demandes } from './demande/demande.entity';
+import { AnalyzeModule } from './analyze/analyze.module';
+import { CloudflareService } from './cloudflare/cloudflare.service';
+import { CloudflareModule } from './cloudflare/cloudflare.module';
 
 @Module({
   imports: [
@@ -26,9 +29,9 @@ import { ProjetFreelanceModule } from './projetFreelance/projet-freelance.module
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities: [User, Demande, ProjetFreelance],
+      entities: [User, Demandes, ProjetFreelance, Offre], // Removed EvaluationModule, DeposeprojetModule
       autoLoadEntities: true,
-      synchronize: true, 
+      synchronize: true,
     }),
     AuthModule,
     UsersModule,
@@ -38,8 +41,24 @@ import { ProjetFreelanceModule } from './projetFreelance/projet-freelance.module
     DemandeModule,
     DeposeprojetModule,
     ProjetFreelanceModule,
+    AnalyzeModule,
+    CloudflareModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, CloudflareService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    console.log('Middleware configuration in AppModule:', consumer);
+    consumer
+      .apply((req, res, next) => {
+        console.log('=== Global Middleware ===');
+        console.log('Request URL:', req.url);
+        console.log('Request method:', req.method);
+        console.log('Request query:', req.query);
+        console.log('Request params:', req.params);
+        next();
+      })
+      .forRoutes('*');
+  }
+}

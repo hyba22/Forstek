@@ -45,7 +45,7 @@ const ListePorteur = () => {
   }, []);
 
   const handleEdit = (projet) => {
-    navigate('/depose-projet', { 
+    navigate('/profile/porteur/depose-projet', { 
       state: { 
         projetToEdit: {
           iddeposeprojet: projet.iddeposeprojet,
@@ -96,7 +96,7 @@ const ListePorteur = () => {
 
   return (
     <div className={styles.dataTableContainer}>
-      <h2>Mes projets soumis</h2>
+      <h2>Projets soumis</h2>
       {isLoading && <div className={styles.loading}>Chargement...</div>}
       
       <table className={styles.dataTable}>

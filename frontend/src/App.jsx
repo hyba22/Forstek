@@ -38,25 +38,21 @@ import ListeProjet from "./Components/Profiles/Porteur/ListeProjet/ListeProjet";
 import PorteurProfile from "./Components/Profiles/Porteur/PorteurProfile";
 import AjoutProjetFreelance from "./Components/Profiles/Investisseur/InvestisseurSidebar/Pages/AjoutProjetFreelance";
 import OffreDispo from "./Components/Profiles/Stagiaire/OffreDispo";
+import SearchBar from "./Components/Searchbar/SearchBar";
+import ProfileHeader from "./Components/Profiles/Profile header/ProfileHeader";
+
 
 function App() {
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
-
-  const openLoginModal = () => setIsLoginModalOpen(true);
-  const closeLoginModal = () => setIsLoginModalOpen(false);
-
-  const openSignUpModal = () => setIsSignUpModalOpen(true);
-  const closeSignUpModal = () => setIsSignUpModalOpen(false);
 
   return (
     <Router>
-      <Navbar onLoginClick={openLoginModal} onSignUpClick={openSignUpModal} />
-      <SignUpModal isOpen={isSignUpModalOpen} onClose={closeSignUpModal} />
-      <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
+      
       <Routes>
         <Route path="/" element={<Accueil />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="searchBar" element={<SearchBar/>} />
+        <Route path="profileHeader" element={<ProfileHeader/>} />
+
         {/* sign up forms routes */}
         <Route path="/signup">
           <Route path="investisseur" element={<FormulaireInvestisseur />} />
@@ -111,6 +107,7 @@ function App() {
         {/* porteur profile's routes */}
         <Route path="/profile/porteur" element={<PorteurProfile />}>
           <Route path="depose-projet" element={<DeposeProjet />} />
+          <Route path="liste-porteur" element={<ListePorteur />} />
           <Route path="liste-projet" element={<ListeProjet />} />
           <Route path="rendv" element={<RendV />} />
           <Route path="parametres" element={<ParametresPartenaire />} />

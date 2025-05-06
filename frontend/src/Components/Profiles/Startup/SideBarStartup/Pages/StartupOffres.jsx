@@ -244,7 +244,7 @@ const StartupOffres = () => {
                   <strong>Localisation:</strong> {offer.localisation}
                 </p>
                 <p>
-                  <strong>Description:</strong> {offer.description.substring(0, 100)}...
+                  <strong>Description:</strong> {offer.description.substring(0, 1000)}...
                 </p>
                 {offer.salaire && (
                   <p>

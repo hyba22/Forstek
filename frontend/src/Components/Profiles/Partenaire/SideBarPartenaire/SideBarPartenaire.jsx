@@ -34,9 +34,9 @@ const SideBarPartenaire = () => {
         <ul>
           <li className={location.pathname.includes("/demande") ? styles.active : ""}>
             <img src="/src/assets/job-offer.png" alt="job" className={styles.itemIcon}/>
-            <NavLink to="demande">demandes d'incubation</NavLink>
+            <NavLink to="demande">Demandes d'incubation</NavLink>
           </li>
-          <li className={location.pathname.includes("/rendez-vous") ? styles.active : ""}>
+          <li className={location.pathname.includes("/rendez-vous") ? styles.active : ""}>  
             <img src="/src/assets/calendar.png" alt="rdv" className={styles.itemIcon}/>
             <NavLink to="rendez-vous">Rendez-vous</NavLink>
           </li>

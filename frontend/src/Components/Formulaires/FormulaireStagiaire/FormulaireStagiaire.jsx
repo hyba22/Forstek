@@ -1,16 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { FaUser, FaLock } from "react-icons/fa";
+import { FaUser, FaLock, FaFacebook, FaTwitter, FaGoogle, FaLinkedin } from "react-icons/fa";
 import { MdEmail, MdCastForEducation } from "react-icons/md";
 import { signUp, signIn } from "../../Services/userService";
 import "./FormulaireStagiaire.css";
+import Navbar from "../../Navbar/Navbar";
+import SignUpModal from "../../Sign up/SignUpModal";
+import LoginModal from "../../Login/LoginModal";
 
 const FormulaireStagiaire = () => {
-  const location = useLocation();
   const navigate = useNavigate();
   const [isSignUpMode, setIsSignUpMode] = useState(false);
   const { state } = useLocation();
-  
+  const location = useLocation();
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
+
+  const openLoginModal = () => setIsLoginModalOpen(true);
+  const closeLoginModal = () => setIsLoginModalOpen(false);
+
+  const openSignUpModal = () => setIsSignUpModalOpen(true);
+  const closeSignUpModal = () => setIsSignUpModalOpen(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,7 +29,7 @@ const FormulaireStagiaire = () => {
     domaine: "",
     role: state?.role || "stagiaire",
   });
-  
+
   const [errors, setErrors] = useState({
     name: "",
     email: "",
@@ -27,13 +37,13 @@ const FormulaireStagiaire = () => {
     prenom: "",
     domaine: "",
   });
-  
+
   const [formError, setFormError] = useState("");
 
   const validateField = (name, value) => {
     let error = "";
-    
-    switch (name) { 
+
+    switch (name) {
       case "email":
         if (!value) {
           error = "Email Est obligatoire";
@@ -74,56 +84,56 @@ const FormulaireStagiaire = () => {
       default:
         break;
     }
-    
+
     return error;
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    
+
     const error = validateField(name, value);
-    
+
     setErrors({
       ...errors,
-      [name]: error
+      [name]: error,
     });
-    
-    setFormData({ 
-      ...formData, 
-      [name]: value 
+
+    setFormData({
+      ...formData,
+      [name]: value,
     });
   };
 
   const validateForm = () => {
     const newErrors = {};
     let isValid = true;
-    
-    Object.keys(formData).forEach(key => {
-      if (isSignUpMode || (key === "email" || key === "password")) {
+
+    Object.keys(formData).forEach((key) => {
+      if (isSignUpMode || key === "email" || key === "password") {
         const error = validateField(key, formData[key]);
         newErrors[key] = error;
         if (error) isValid = false;
       }
     });
-    
+
     setErrors(newErrors);
     return isValid;
   };
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       setFormError("Corrigez les erreurs du formulaire");
       return;
     }
-    
+
     try {
       const response = await signUp({
         ...formData,
-        role: "stagiaire"
+        role: "stagiaire",
       });
-      
+
       setFormData({
         name: "",
         email: "",
@@ -132,31 +142,33 @@ const FormulaireStagiaire = () => {
         domaine: "",
         role: "stagiaire",
       });
-      
+
       setFormError("");
-      navigate("/profile/stagiaire", { 
-        state: { user: response.user } 
+      navigate("/profile/stagiaire", {
+        state: { user: response.user },
       });
     } catch (error) {
       console.error("Signup error:", error);
-      setFormError(error.response?.data?.message || "Erreur. Réessayez de nouveau.");
+      setFormError(
+        error.response?.data?.message || "Erreur. Réessayez de nouveau."
+      );
     }
   };
 
   const handleSignIn = async (e) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       setFormError("Entrez un email valide et votre mot de passe");
       return;
     }
-    
+
     try {
       const response = await signIn({
         email: formData.email,
-        password: formData.password
+        password: formData.password,
       });
-      
+
       setFormError("");
       navigate(`/${response.user.role.toLowerCase()}`);
     } catch (error) {
@@ -166,162 +178,225 @@ const FormulaireStagiaire = () => {
   };
 
   return (
-    <div className={`container ${isSignUpMode ? "sign-up-mode" : ""}`}>
-      <div className="forms-container">
-        <div className="signin-signup">
-          <form onSubmit={handleSignIn} className="sign-in-form">
-            <h2 className="title">Connexion</h2>
-            {formError && <div className="form-error">{formError}</div>}
-            <div className="input-field">
-              <MdEmail className="icon" />
-              <input
-                type="email"
-                placeholder="Email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-              />
-              {errors.email && <span className="field-error">{errors.email}</span>}
-            </div>
-            <div className="input-field">
-              <FaLock className="icon" />
-              <input
-                type="password"
-                placeholder="Mot de passe"
-                name="password"
-                value={formData.password}
-                onChange={handleInputChange}
-                required
-              />
-              {errors.password && <span className="field-error">{errors.password}</span>}
-            </div>
-            <button type="submit" className="btn solid">
-              Se connecter
-            </button>
-          </form>
+    <>
+      <Navbar onLoginClick={openLoginModal} onSignUpClick={openSignUpModal} />
+      <SignUpModal isOpen={isSignUpModalOpen} onClose={closeSignUpModal} />
+      <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
+      <div className={`container ${isSignUpMode ? "sign-up-mode" : ""}`}>
+        <div className="forms-container">
+          <div className="signin-signup">
+            <form onSubmit={handleSignIn} className="sign-in-form">
+              <h2 className="title">Connexion</h2>
+              {formError && <div className="form-error">{formError}</div>}
+              <div className="input-field">
+                <MdEmail className="icon" />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                />
+                {errors.email && (
+                  <span className="field-error">{errors.email}</span>
+                )}
+              </div>
+              <div className="input-field">
+                <FaLock className="icon" />
+                <input
+                  type="password"
+                  placeholder="Mot de passe"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  required
+                />
+                {errors.password && (
+                  <span className="field-error">{errors.password}</span>
+                )}
+              </div>
+              <button type="submit" className="btn solid">
+                Se connecter
+              </button>
+              <p className="social-text">
+                Ou utiliser l'un de vos réseaux sociaux
+              </p>
+              <div className="social-media">
+                <a href="#" className="social-icon">
+                  <FaFacebook />
+                </a>
+                <a href="#" className="social-icon">
+                  <FaTwitter />
+                </a>
+                <a href="#" className="social-icon">
+                  <FaGoogle />
+                </a>
+                <a href="#" className="social-icon">
+                  <FaLinkedin />
+                </a>
+              </div>
+            </form>
 
-          <form onSubmit={handleSignUp} className="sign-up-form">
-            <h2 className="title">Inscription Stagiaire</h2>
-            {formError && <div className="form-error">{formError}</div>}
-            <div className="input-field">
-              <FaUser className="icon" />
-              <input
-                type="text"
-                placeholder="Nom"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                required
-              />
-              {errors.name && <span className="field-error">{errors.name}</span>}
+            <form onSubmit={handleSignUp} className="sign-up-form">
+              <h2 className="title">Inscription Stagiaire</h2>
+              {formError && <div className="form-error">{formError}</div>}
+              <div className="input-field">
+                <FaUser className="icon" />
+                <input
+                  type="text"
+                  placeholder="Nom"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  required
+                />
+                {errors.name && (
+                  <span className="field-error">{errors.name}</span>
+                )}
+              </div>
+              <div className="input-field">
+                <FaUser className="icon" />
+                <input
+                  type="text"
+                  placeholder="Prénom"
+                  name="prenom"
+                  value={formData.prenom}
+                  onChange={handleInputChange}
+                  required
+                />
+                {errors.prenom && (
+                  <span className="field-error">{errors.prenom}</span>
+                )}
+              </div>
+              <div className="input-field">
+                <MdCastForEducation className="icon" />
+                <input
+                  type="text"
+                  placeholder="Domaine d'étude"
+                  name="domaine"
+                  value={formData.domaine}
+                  onChange={handleInputChange}
+                  required
+                />
+                {errors.domaine && (
+                  <span className="field-error">{errors.domaine}</span>
+                )}
+              </div>
+              <div className="input-field">
+                <MdEmail className="icon" />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                />
+                {errors.email && (
+                  <span className="field-error">{errors.email}</span>
+                )}
+              </div>
+              <div className="input-field">
+                <FaLock className="icon" />
+                <input
+                  type="password"
+                  placeholder="Mot de passe"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  required
+                  minLength={8}
+                />
+                {errors.password && (
+                  <span className="field-error">{errors.password}</span>
+                )}
+              </div>
+              <button type="submit" className="btn solid">
+                S'inscrire
+              </button>
+              <p className="social-text">
+                Ou utiliser l'un de vos réseaux sociaux
+              </p>
+              <div className="social-media">
+                <a href="#" className="social-icon">
+                  <FaFacebook />
+                </a>
+                <a href="#" className="social-icon">
+                  <FaTwitter />
+                </a>
+                <a href="#" className="social-icon">
+                  <FaGoogle />
+                </a>
+                <a href="#" className="social-icon">
+                  <FaLinkedin />
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div className="panels-container">
+          <div className="panel left-panel">
+            <div className="content">
+              <h3>Nouveau stagiaire?</h3>
+              <p>Créez votre compte ici</p>
+              <button
+                className="btn transparent"
+                onClick={() => {
+                  setIsSignUpMode(true);
+                  setFormError("");
+                  setErrors({
+                    name: "",
+                    email: "",
+                    password: "",
+                    prenom: "",
+                    domaine: "",
+                  });
+                }}
+              >
+                S'inscrire
+              </button>
+              
             </div>
-            <div className="input-field">
-              <FaUser className="icon" />
-              <input
-                type="text"
-                placeholder="Prénom"
-                name="prenom"
-                value={formData.prenom}
-                onChange={handleInputChange}
-                required
-              />
-              {errors.prenom && <span className="field-error">{errors.prenom}</span>}
+            <img
+              src="/src/assets/1.png"
+              className="image"
+              alt="Usability Testing"
+            />
+          </div>
+
+          <div className="panel right-panel">
+            <div className="content">
+              <h3>Déjà inscrit?</h3>
+              <p>Connectez-vous ici</p>
+              <button
+                className="btn transparent"
+                onClick={() => {
+                  setIsSignUpMode(false);
+                  setFormError("");
+                  setErrors({
+                    name: "",
+                    email: "",
+                    password: "",
+                    prenom: "",
+                    domaine: "",
+                  });
+                }}
+              >
+                Se connecter
+              </button>
+              
             </div>
-            <div className="input-field">
-              <MdCastForEducation className="icon" />
-              <input
-                type="text"
-                placeholder="Domaine d'étude"
-                name="domaine"
-                value={formData.domaine}
-                onChange={handleInputChange}
-                required
-              />
-              {errors.domaine && <span className="field-error">{errors.domaine}</span>}
-            </div>
-            <div className="input-field">
-              <MdEmail className="icon" />
-              <input
-                type="email"
-                placeholder="Email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-              />
-              {errors.email && <span className="field-error">{errors.email}</span>}
-            </div>
-            <div className="input-field">
-              <FaLock className="icon" />
-              <input
-                type="password"
-                placeholder="Mot de passe"
-                name="password"
-                value={formData.password}
-                onChange={handleInputChange}
-                required
-                minLength={8}
-              />
-              {errors.password && <span className="field-error">{errors.password}</span>}
-            </div>
-            <button type="submit" className="btn solid">
-              S'inscrire
-            </button>
-          </form>
+            <img
+              src="/src/assets/1.png"
+              className="image"
+              alt="Usability Testing"
+            />
+          </div>
         </div>
       </div>
-
-      <div className="panels-container">
-        <div className="panel left-panel">
-          <div className="content">
-            <h3>Nouveau stagiaire?</h3>
-            <p>Créez votre compte ici</p>
-            <button
-              className="btn transparent"
-              onClick={() => {
-                setIsSignUpMode(true);
-                setFormError("");
-                setErrors({
-                  name: "",
-                  email: "",
-                  password: "",
-                  prenom: "",
-                  domaine: "",
-                });
-              }}
-            >
-              S'inscrire
-            </button>
-          </div>
-          <img src="/src/assets/1.png" className="image" alt="Usability Testing" />
-        </div>
-
-        <div className="panel right-panel">
-          <div className="content">
-            <h3>Déjà inscrit?</h3>
-            <p>Connectez-vous ici</p>
-            <button
-              className="btn transparent"
-              onClick={() => {
-                setIsSignUpMode(false);
-                setFormError("");
-                setErrors({
-                  name: "",
-                  email: "",
-                  password: "",
-                  prenom: "",
-                  domaine: "",
-                });
-              }}
-            >
-              Se connecter
-            </button>
-          </div>
-          <img src="/src/assets/1.png" className="image" alt="Usability Testing" />
-        </div>
-      </div>
-    </div>
+    </>
   );
 };
 

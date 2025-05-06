@@ -12,12 +12,22 @@ import {
 import { MdEmail } from "react-icons/md";
 import { BsTextareaResize } from "react-icons/bs";
 import { getUsers, signUp, signIn } from '../../Services/userService';
+import Navbar from "../../Navbar/Navbar";
+import LoginModal from "../../Login/LoginModal";
+import SignUpModal from "../../Sign up/SignUpModal";
 
 const FreelanceFormulaire = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isSignUpMode, setIsSignUpMode] = useState(false);
-  
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+        const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
+      
+        const openLoginModal = () => setIsLoginModalOpen(true);
+        const closeLoginModal = () => setIsLoginModalOpen(false);
+      
+        const openSignUpModal = () => setIsSignUpModalOpen(true);
+        const closeSignUpModal = () => setIsSignUpModalOpen(false);
   const role = location.pathname.split('/').pop();
   
   if (role !== 'freelance') {
@@ -211,6 +221,10 @@ const FreelanceFormulaire = () => {
   };
 
   return (
+    <>
+    <Navbar onLoginClick={openLoginModal} onSignUpClick={openSignUpModal} />
+    <SignUpModal isOpen={isSignUpModalOpen} onClose={closeSignUpModal} />
+    <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
     <div className={`container ${isSignUpMode ? "sign-up-mode" : ""}`}>
       <div className="forms-container">
         <div className="signin-signup">
@@ -359,7 +373,7 @@ const FreelanceFormulaire = () => {
             <h3>Nouvel utilisateur?</h3>
             <p>C'est par ici</p>
             <button
-              className="btn transparent"
+              className="btn "
               onClick={() => {
                 setIsSignUpMode(true);
                 setFormError("");
@@ -384,7 +398,7 @@ const FreelanceFormulaire = () => {
             <h3>Avez-vous un compte?</h3>
             <p>c'est par ici</p>
             <button
-              className="btn transparent"
+              className="btn "
               onClick={() => {
                 setIsSignUpMode(false);
                 setFormError("");
@@ -405,7 +419,7 @@ const FreelanceFormulaire = () => {
         </div>
       </div>
     </div>
-  );
+    </> );
 };
 
 export default FreelanceFormulaire;

@@ -1,10 +1,25 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from "./accueil.module.css";
 import Carousel from "react-bootstrap/Carousel";
+import Navbar from "../Navbar/Navbar";
+import SignUpModal from "../Sign up/SignUpModal";
+import LoginModal from "../Login/LoginModal";
 
 const Accueil = () => {
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+    const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
+  
+    const openLoginModal = () => setIsLoginModalOpen(true);
+    const closeLoginModal = () => setIsLoginModalOpen(false);
+  
+    const openSignUpModal = () => setIsSignUpModalOpen(true);
+    const closeSignUpModal = () => setIsSignUpModalOpen(false);
+  
   return (
     <>
+      <Navbar onLoginClick={openLoginModal} onSignUpClick={openSignUpModal} />
+      <SignUpModal isOpen={isSignUpModalOpen} onClose={closeSignUpModal} />
+      <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
       <h1 className={styles.title}>Profitez de nos opportunités</h1>
       <div className={styles.carouselContainer}>
         <Carousel data-bs-theme="dark" className={styles.customCarousel}>

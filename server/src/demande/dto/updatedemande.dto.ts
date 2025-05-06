@@ -1,43 +1,19 @@
-import { IsEmail, IsOptional, IsString, IsUrl } from 'class-validator';
+import { IsString, IsOptional, IsEnum } from 'class-validator';
+import { StatutDemande } from './statut-demande.enum'; 
 
 export class UpdateDemandeDto {
-  @IsOptional()
   @IsString()
-  nomProjet?: string;
-
   @IsOptional()
+  lettreMotivation?: string;
+
   @IsString()
-  nomPorteur?: string;
-
   @IsOptional()
-  @IsEmail()
-  email?: string;
+  cv?: string;
 
-  @IsOptional()
   @IsString()
-  description?: string;
-
   @IsOptional()
-  @IsString()
-  secteurActivite?: string;
-
-  @IsOptional()
-  @IsString()
-  stadeDeveloppement?: string;
-
-  @IsOptional()
-  @IsUrl()
-  siteWeb?: string;
-
-  @IsOptional()
-  @IsString()
-  besoins?: string;
-
-  @IsOptional()
-  @IsString()
-  equipe?: string;
-
-  @IsOptional()
-  @IsString()
-  statut?: string;
+  @IsEnum(StatutDemande, {
+    message: `Le statut doit être l'une des valeurs suivantes: ${Object.values(StatutDemande).join(', ')}`
+  })
+  statut?: StatutDemande; 
 }

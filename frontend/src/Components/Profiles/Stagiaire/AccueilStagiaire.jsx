@@ -72,10 +72,10 @@ const AccueilStagiaire = () => {
       </div>
 
       <div className="quick-actions d-flex justify-content-center gap-3 flex-wrap">
-        <Link to="/offres-disponibles" className="action-button btn btn-primary px-4 py-2">
+        <Link to="offres-dispo" className="action-button btn btn-primary px-4 py-2">
           Voir les nouvelles offres
         </Link>
-        <Link to="/stagiaire-profile/parametres" className="action-button btn btn-outline-primary px-4 py-2">
+        <Link to="parametres" className="action-button btn btn-outline-primary px-4 py-2">
           Compléter mon profil
         </Link>
       </div>

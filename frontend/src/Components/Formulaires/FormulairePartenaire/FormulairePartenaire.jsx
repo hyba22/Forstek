@@ -7,13 +7,23 @@ import { TfiAgenda } from "react-icons/tfi";
 import "./FormulairePartenaire.css";
 import { getUsers, signUp, signIn } from '../../Services/userService';
 import { useLocation } from "react-router-dom";
+import Navbar from "../../Navbar/Navbar";
+import SignUpModal from "../../Sign up/SignUpModal";
+import LoginModal from "../../Login/LoginModal";
 
 const FormulairePartenaire = () => {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
   const location = useLocation();
   
   const role = location.pathname.split('/').pop();
-  
+      const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+        const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
+      
+        const openLoginModal = () => setIsLoginModalOpen(true);
+        const closeLoginModal = () => setIsLoginModalOpen(false);
+      
+        const openSignUpModal = () => setIsSignUpModalOpen(true);
+        const closeSignUpModal = () => setIsSignUpModalOpen(false);
   if (role !== 'partenaire') {
     return <div>Invalid access to partenaire form</div>;
   }
@@ -214,7 +224,11 @@ const FormulairePartenaire = () => {
     }
   };
 
-  return (
+  return ( 
+    <>
+    <Navbar onLoginClick={openLoginModal} onSignUpClick={openSignUpModal} />
+    <SignUpModal isOpen={isSignUpModalOpen} onClose={closeSignUpModal} />
+    <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
     <div className={`container ${isSignUpMode ? "sign-up-mode" : ""}`}>
       <div className="forms-container">
         <div className="signin-signup">
@@ -421,7 +435,7 @@ const FormulairePartenaire = () => {
         </div>
       </div>
     </div>
-  );
+  </>);
 };
 
 export default FormulairePartenaire;

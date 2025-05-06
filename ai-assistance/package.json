@@ -1,0 +1,21 @@
+{
+	"name": "ai-assistance",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"deploy": "wrangler deploy",
+		"dev": "wrangler dev",
+		"start": "wrangler dev",
+		"test": "vitest"
+	},
+	"devDependencies": {
+		"@cloudflare/vitest-pool-workers": "^0.8.19",
+		"vitest": "~3.0.7",
+		"wrangler": "^4.14.1"
+	},
+	"dependencies": {
+		"@cloudflare/ai-utils": "^1.0.1",
+		"chanfana": "^2.8.0",
+		"zod": "^3.24.4"
+	}
+}

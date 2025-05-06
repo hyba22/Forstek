@@ -3,7 +3,7 @@ import { FiEdit2, FiRefreshCw, FiSend, FiStar, FiTrash2 } from 'react-icons/fi';
 import {
   createEvaluation,
   deleteEvaluation,
-  getDemandes,
+  getProjets,
   getEvaluations,
   updateEvaluation
 } from '../../../../Services/userService';
@@ -12,7 +12,6 @@ import styles from './evaluationProjet.module.css';
 const Evaluations = () => {
   const [evaluations, setEvaluations] = useState([]);
   const [projects, setProjects] = useState([]);
-  const [partners, setPartners] = useState([]);
   const [formData, setFormData] = useState({
     projectId: '',
     partnerId: '', 
@@ -29,25 +28,24 @@ const Evaluations = () => {
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
 
-  const loadDemandes = async () => {
+  const loadProjects = async () => {
     try {
-      const response = await getDemandes();
+      const response = await getProjets();
       if (!response) throw new Error('Aucune réponse du serveur');
       
       const data = response.data || response;
       const formattedData = Array.isArray(data) ? data : [data];
       
-      // Extraire les projets
-      const projectsList = formattedData.map(demande => ({
-        projectId: demande._id || demande.id,
-        projectName: demande.name || `Projet ${demande._id || demande.id}`
+      const projectsList = formattedData.map(project => ({
+        projectId: project._id || project.id,
+        projectName: project.titre || project.name || `Projet ${project._id || project.id}`
       }));
       
-      return { projects: projectsList, partners: [] }; 
+      return { projects: projectsList };
     } catch (err) {
-      console.error('Erreur chargement demandes:', err);
-      setError(err.message || "Erreur lors du chargement des demandes.");
-      return { projects: [], partners: [] };
+      console.error('Erreur chargement projets:', err);
+      setError(err.message || "Erreur lors du chargement des projets.");
+      return { projects: [] };
     }
   };
 
@@ -70,12 +68,12 @@ const Evaluations = () => {
       setIsLoading(true);
       setError(null);
       try {
-        const [demandesData, evaluationsData] = await Promise.all([
-          loadDemandes(),
+        const [projectsData, evaluationsData] = await Promise.all([
+          loadProjects(),
           loadEvaluations()
         ]);
         
-        setProjects(demandesData.projects);
+        setProjects(projectsData.projects);
         setEvaluations(evaluationsData);
       } catch (err) {
         setError(err.message || "Erreur lors du chargement des données.");
@@ -218,11 +216,11 @@ const Evaluations = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const [demandesData, evaluationsData] = await Promise.all([
-        loadDemandes(),
+      const [projectsData, evaluationsData] = await Promise.all([
+        loadProjects(),
         loadEvaluations()
       ]);
-      setProjects(demandesData.projects);
+      setProjects(projectsData.projects);
       setEvaluations(evaluationsData);
       setSuccessMessage("Données actualisées avec succès !");
     } catch (err) {

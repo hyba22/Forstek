@@ -1,44 +1,59 @@
+// SuiviDemande.jsx
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './suiviDemande.module.css'; 
+import styles from './suiviDemande.module.css';
+import { getDemandesWithOffers } from '../../Services/userService';
 
 const SuiviDemande = () => {
   const [demandes, setDemandes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  useEffect(() => { 
-    const token = localStorage.getItem('token');
-    if (!token) {
-      alert('Veuillez vous connecter');
-      navigate('/'); 
-      return;
-    }
-
-    fetch('http://localhost:3000/api/stagiaire/suivi-demande', { 
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`Erreur HTTP: ${response.status}`);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        console.log('Starting data fetch...');
+        const data = await getDemandesWithOffers();
+        console.log('Received data:', data);
+        setDemandes(Array.isArray(data) ? data : []);
+      } catch (err) {
+        console.error('Detailed fetch error:', err);
+        let errorMessage = 'Failed to fetch demandes. Please try again later.';
+        try {
+          const errorData = JSON.parse(err.message);
+          errorMessage = errorData.message || errorMessage;
+        } catch (parseError) {
+          console.error('Error parsing error message:', parseError);
         }
-        return response.json();
-      })
-      .then(data => setDemandes(data.data || []))
-      .catch(error => {
-        console.error('Erreur:', error);
-        alert(`Erreur: ${error.message}`);
-        navigate('/');
-      });
-  }, [navigate]);
+        setError(errorMessage);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const formatStatus = (status) => {
+    return status
+      .replace('_', ' ')
+      .replace(/\b\w/g, (l) => l.toUpperCase());
+  };
+
+  if (loading) {
+    return <div className={styles.loading}>Chargement en cours...</div>;
+  }
+
+  if (error) {
+    return <div className={styles.error}>{error}</div>;
+  }
 
   return (
     <div className={styles.body}>
       <div className={styles.backButtonContainer}>
-        <button 
-          onClick={() => navigate('/stagiaire-profile')} 
+        <button
+          onClick={() => navigate('/stagiaire-profile')}
           className={styles.backButton}
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -47,9 +62,9 @@ const SuiviDemande = () => {
           Retour
         </button>
       </div>
-      
+
       <h1 className={styles.modernTitle}>Suivi de demande</h1>
-      
+
       <table className={styles.modernTable}>
         <thead>
           <tr>
@@ -57,23 +72,29 @@ const SuiviDemande = () => {
             <th>Poste</th>
             <th>Date de demande</th>
             <th>État</th>
-            <th>Réponse</th>
           </tr>
         </thead>
         <tbody>
           {demandes.length > 0 ? (
-            demandes.map(demande => (
+            demandes.map((demande) => (
               <tr key={demande.id}>
-                <td>{demande.nomSociete}</td>
-                <td>{demande.poste}</td>
-                <td>{demande.dateDemande}</td>
-                <td>{demande.etat}</td>
-                <td>{demande.reponse}</td>
+                <td>{demande.offre?.societe || 'N/A'}</td>
+                <td>{demande.offre?.titre || 'N/A'}</td>
+                <td>
+                  {demande.dateDemande
+                    ? new Date(demande.dateDemande).toLocaleDateString('fr-FR')
+                    : 'N/A'}
+                </td>
+                <td>
+                  <span className={`${styles.statusBadge} ${styles[demande.statut]}`}>
+                    {formatStatus(demande.statut)}
+                  </span>
+                </td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan="5">Aucune demande trouvée</td>
+              <td colSpan="4">Aucune demande trouvée</td>
             </tr>
           )}
         </tbody>

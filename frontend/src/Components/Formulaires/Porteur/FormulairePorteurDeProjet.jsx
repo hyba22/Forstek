@@ -4,10 +4,21 @@ import { MdEmail } from "react-icons/md";
 import './porteur.css';
 import { getUsers, signUp, signIn } from '../../Services/userService';
 import { useLocation } from "react-router-dom";
+import Navbar from "../../Navbar/Navbar";
+import SignUpModal from "../../Sign up/SignUpModal";
+import LoginModal from "../../Login/LoginModal";
 
 const FormulairePorteurDeProjet = () => {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
-  const location = useLocation();
+  const location = useLocation(); 
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+      const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
+    
+      const openLoginModal = () => setIsLoginModalOpen(true);
+      const closeLoginModal = () => setIsLoginModalOpen(false);
+    
+      const openSignUpModal = () => setIsSignUpModalOpen(true);
+      const closeSignUpModal = () => setIsSignUpModalOpen(false);
   
   const role = location.pathname.split('/').pop();
   
@@ -199,6 +210,10 @@ const FormulairePorteurDeProjet = () => {
   };
 
   return (
+    <>
+    <Navbar onLoginClick={openLoginModal} onSignUpClick={openSignUpModal} />
+    <SignUpModal isOpen={isSignUpModalOpen} onClose={closeSignUpModal} />
+    <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
     <div className={`container ${isSignUpMode ? "sign-up-mode" : ""}`}>
       <div className="forms-container">
         <div className="signin-signup">
@@ -379,7 +394,7 @@ const FormulairePorteurDeProjet = () => {
         </div>
       </div>
     </div>
-  );
+    </>);
 };
 
 export default FormulairePorteurDeProjet;

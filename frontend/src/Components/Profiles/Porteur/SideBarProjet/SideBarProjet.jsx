@@ -40,6 +40,10 @@ const SideBarProjet = () => {
             <img src="/src/assets/calendar.png" alt="rdv" className={styles.itemIcon}/>
             <NavLink to="rendv">Rendez-vous</NavLink>
           </li>
+          <li className={location.pathname.includes("/liste-porteur") ? styles.active : ""}>
+            <img src="/src/assets/clipboard.png" alt="parametres" className={styles.itemIcon}/>
+            <NavLink to="liste-porteur">Liste des demandes</NavLink>
+          </li>
           <li className={location.pathname.includes("/parametres") ? styles.active : ""}>
             <img src="/src/assets/settings.png" alt="parametres" className={styles.itemIcon}/>
             <NavLink to="parametres">Paramètres</NavLink>

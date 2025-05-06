@@ -14,7 +14,9 @@
 }
 
 .section h2 {
+  margin-top: 2rem;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #5995df;
 }
 
 .roles {
@@ -63,13 +65,24 @@
   margin-right: 1rem !important;
 }
 
-.closeButton {
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-left: 1rem !important;
 
+.closeButton {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: #5995df;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  color: #333;
+  transform: scale(1.1);
 }

@@ -7,7 +7,6 @@
   background-color: #fff;
   height: 100%;
   overflow: hidden;
-  
 }
 
 .forms-container {
@@ -45,6 +44,7 @@ form {
 form.sign-up-form {
   opacity: 0;
   z-index: 1;
+  margin-top: 1rem;
 }
 
 form.sign-in-form {

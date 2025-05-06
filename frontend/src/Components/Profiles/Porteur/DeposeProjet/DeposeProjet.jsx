@@ -255,7 +255,6 @@ const DeposeProjet = () => {
             </button>
             <button
               type="button"
-              onClick={() => navigate('/liste-porteur')}
               className={styles.cancelBtn}
               disabled={isSubmitting}
             >

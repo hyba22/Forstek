@@ -87,6 +87,11 @@
   flex-direction: row;
   gap: 1.5rem;
   justify-self: center;
+  justify-content: center;
+  width: 400px;
+  padding-bottom: 0.5rem;
+  margin-left: 4rem;
+  margin-top: 1rem;
 }
 
 .submitBtn {
@@ -96,7 +101,7 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  width: 120px;
+  width: 150px;
 }
 
 .submitBtn:disabled {
@@ -111,7 +116,7 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  width: 120px;
+  width: 150px;
   height: 45px;
   margin-top: 0.75rem;
 }
