@@ -51,20 +51,7 @@ const SuiviDemande = () => {
 
   return (
     <div className={styles.body}>
-      <div className={styles.backButtonContainer}>
-        <button
-          onClick={() => navigate('/stagiaire-profile')}
-          className={styles.backButton}
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
-          Retour
-        </button>
-      </div>
-
       <h1 className={styles.modernTitle}>Suivi de demande</h1>
-
       <table className={styles.modernTable}>
         <thead>
           <tr>

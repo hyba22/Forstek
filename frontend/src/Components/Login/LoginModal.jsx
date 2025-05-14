@@ -29,7 +29,7 @@ const LoginModal = ({ isOpen, onClose }) => {
 
   const redirectToDashboard = (role) => {
     const routes = {
-      admin: '/admin',
+      admin: '/dashboard',
       porteur_de_projet: '/profile/porteur',
       startup: '/profile/startup',
       stagiaire: '/profile/stagiaire',

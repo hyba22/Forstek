@@ -1,0 +1,39 @@
+/* Animation for chat bubble */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.chat-bubble {
+  animation: bounce 2s infinite;
+}
+
+.chat-bubble:hover {
+  transform: scale(1.1);
+  transition: transform 0.2s;
+}
+
+/* Scrollbar styling for chat content */
+.chat-content::-webkit-scrollbar {
+  width: 5px;
+}
+
+.chat-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.chat-content::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.chat-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

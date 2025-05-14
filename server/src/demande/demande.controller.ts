@@ -23,6 +23,8 @@ import { UpdateDemandeDto } from './dto/updatedemande.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { StatutDemande } from './dto/statut-demande.enum';
 import { Response, Request } from 'express';
+import { diskStorage } from 'multer';
+import { extname, join } from 'path';
 
 
 @Controller('demandes')
@@ -39,7 +41,7 @@ export class DemandeController {
       console.log('Request params:', request.params);
       console.log('Request headers:', request.headers);
      
-  /*  try {
+    try {
       console.log('Executing findAllWithOffers...');
       const demandes = await this.demandeService.findAllWithOffers();
       console.log('Successfully fetched demandes:', demandes);
@@ -53,7 +55,7 @@ export class DemandeController {
         },
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
-    }*/
+    }
   }
 
   @Get('test-fetch')
@@ -67,7 +69,7 @@ async testFetch(@Req() request: Request) {
     return this.demandeService.findOne(id);
   }
 
-
+/*
   @Post('apply')
   async applyForOffer(@Body() createDemandeDto: CreateDemandeDto) {
     try {
@@ -82,7 +84,26 @@ async testFetch(@Req() request: Request) {
         error.status || HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
+  }**/
+
+    @Post('apply')
+async applyForOffer(@Body() createDemandeDto: CreateDemandeDto) {
+  try {
+    if (!createDemandeDto.offreId) {
+      throw new BadRequestException('Offer ID is required');
+    }
+    if (!createDemandeDto.cv) {
+      throw new BadRequestException('CV filename is required');
+    }
+    return await this.demandeService.createForOffer(createDemandeDto);
+  } catch (error) {
+    console.error('Error creating demande:', error);
+    throw new HttpException(
+      error.message,
+      error.status || HttpStatus.INTERNAL_SERVER_ERROR,
+    );
   }
+}
 
   @Post()
   create(@Body() createDemandeDto: CreateDemandeDto) {
@@ -116,14 +137,32 @@ async testFetch(@Req() request: Request) {
   ) {
     return this.demandeService.updateStatut(id, statut);
   }
+
+
   @Post('upload-cv')
-  @UseInterceptors(FileInterceptor('cv'))
+  @UseInterceptors(
+    FileInterceptor('cv', {
+      storage: diskStorage({
+        destination: './uploads',
+        filename: (req, file, callback) => {
+          const uniqueSuffix = Date.now();
+          const ext = extname(file.originalname).toLowerCase();
+          const baseName = file.originalname.replace(ext, '');
+          callback(null, `${uniqueSuffix}-${baseName}${ext}`);
+        },
+      }),
+      fileFilter: (req, file, callback) => {
+        if (!file.originalname.match(/\.(pdf|doc|docx)$/)) {
+          return callback(new BadRequestException('Only PDF, DOC, and DOCX files are allowed!'), false);
+        }
+        callback(null, true);
+      },
+    }),
+  )
   async uploadCV(@UploadedFile() file: Express.Multer.File) {
-    // Removed offerId parameter
     if (!file) {
       throw new BadRequestException('No file uploaded');
     }
-    return this.demandeService.handleCVUpload(file);
+    return { filename: file.filename };
   }
-
 }

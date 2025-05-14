@@ -36,6 +36,10 @@ const SideBarStartup = () => {
             <img src="/src/assets/job-offer.png" alt="job" className={styles.itemIcon}/>
             <NavLink to="offres">Ajouter des Offres </NavLink>
           </li>
+           <li className={location.pathname.includes("/suiviCondidature") ? styles.active : ""}>
+            <img src="/src/assets/condidate (1).png" alt="condidature" className={styles.itemIcon}/>
+            <NavLink to="suiviCondidature">Suivi Condidature</NavLink>
+          </li>
           <li className={location.pathname.includes("/rendez-vous") ? styles.active : ""}>
             <img src="/src/assets/calendar.png" alt="rdv" className={styles.itemIcon}/>
             <NavLink to="rendez-vous">Rendez-vous</NavLink>

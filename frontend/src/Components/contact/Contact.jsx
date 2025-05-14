@@ -1,9 +1,12 @@
 import React from "react";
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaClock } from "react-icons/fa";
 import styles from "./Contact.module.css";
+import Navbar from "../Navbar/Navbar";
 
 const Contact = () => {
   return (
+    <>
+    <Navbar/>
     <div className={styles.contactPage}>
       <div className={styles.heroSection}>
         <h1>Nous contacter</h1>
@@ -102,6 +105,7 @@ const Contact = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

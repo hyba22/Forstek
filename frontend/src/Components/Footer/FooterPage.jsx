@@ -4,6 +4,7 @@ import { FaFacebook, FaRegCopyright, FaGoogle, FaLinkedin, FaLock, FaTwitter, Fa
 
 const FooterPage = () => {
   return (
+    
     <div className={styles.container}>
       <hr/>
       <div className={styles.content}>

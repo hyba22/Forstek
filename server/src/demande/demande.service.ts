@@ -5,7 +5,6 @@ import { Demandes } from './demande.entity';
 import { CreateDemandeDto } from './dto/createdemande.dto';
 import { UpdateDemandeDto } from './dto/updatedemande.dto';
 import { StatutDemande } from './dto/statut-demande.enum';
-import { plainToInstance } from 'class-transformer';
 import { Offre } from 'src/offres/offre.entity';
 
 
@@ -47,8 +46,9 @@ export class DemandeService {
   }
 
 
-  async findAll(): Promise<Demandes[]> {
-    return this.demandeRepository.find();
+async findAll(): Promise<Demandes[]> {
+    const demandes = await this.demandeRepository.find({ relations: ['offre'] });
+    return Array.isArray(demandes) ? demandes : [];
   }
   async findOne(id: number): Promise<Demandes> {
     if (isNaN(id)) {
@@ -101,7 +101,7 @@ async update(id: number, updateDemandeDto: UpdateDemandeDto): Promise<Demandes> 
     demande.statut = statut;
     return this.demandeRepository.save(demande);
   }
-
+/*
   async handleCVUpload(file: Express.Multer.File): Promise<{ filePath: string; originalname: string }> { 
     if (!file) {
       throw new BadRequestException('No file uploaded');
@@ -111,27 +111,14 @@ async update(id: number, updateDemandeDto: UpdateDemandeDto): Promise<Demandes> 
       filePath: `/uploads/${file.filename}`,
       originalname: file.originalname 
     };
+  }*/
+async handleCVUpload(file: Express.Multer.File): Promise<string> {
+    if (!file) {
+      throw new Error('No file provided');
+    }
+    return file.filename;
   }
 /*
-async findAllWithOffers(): Promise<Demandes[]> {
-  return this.demandeRepository.find({
-    relations: ['offre'],
-    select: {
-      id: true,
-      name: true,
-      email: true,
-      statut: true,
-      dateDemande: true,
-      offre: {
-        id: true,
-        titre: true,
-        societe: true
-      }
-    },
-    order: { dateDemande: 'DESC' }
-  });
-}*/
-
 async findAllWithOffers(): Promise<any> {
   try {
     console.log('Starting database query...');
@@ -154,5 +141,24 @@ async findAllWithOffers(): Promise<any> {
     console.error('Database error:', error);
     throw new InternalServerErrorException('Failed to fetch demandes with offers');
   }
-}
+ }*/
+
+  async findAllWithOffers(): Promise<Demandes[]> {
+    console.log('Starting database query...');
+    const demandes = await this.demandeRepository.find({
+      select: ['id', 'name', 'email', 'cv', 'lettreMotivation', 'statut', 'dateDemande', 'updatedAt', 'offreId'],
+      relations: ['offre'],
+    });
+
+    const baseUrl = 'http://localhost:3000/api/uploads';
+    const updatedDemandes = demandes.map((demande) => {
+      if (demande.cv) {
+        demande.cv = `${baseUrl}/${demande.cv}`;
+      }
+      return demande;
+    });
+
+    console.log('Raw query result:', JSON.stringify(updatedDemandes, null, 2));
+    return updatedDemandes;
+  }
 }

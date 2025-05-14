@@ -3,7 +3,7 @@ import { StatutDemande } from './statut-demande.enum';
 
 export class CreateDemandeDto {
 
-  @IsNumberString()
+  @IsNumber()
   offreId: number;
 
   @IsString()

@@ -2,6 +2,7 @@ import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 't
 import { StatutDemande } from '../demande/dto/statut-demande.enum';
 import { Offre } from 'src/offres/offre.entity';
 import { IsInt } from 'class-validator';
+import { Expose } from 'class-transformer';
 
 @Entity("demandes")
 export class Demandes {
@@ -24,6 +25,7 @@ export class Demandes {
   
   
   @Column({ type: 'text', nullable: true }) 
+  @Expose()
   cv: string | null; 
 
   @Column({

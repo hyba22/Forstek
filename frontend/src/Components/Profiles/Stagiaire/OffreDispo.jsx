@@ -118,7 +118,8 @@ const OffreDispo = () => {
       setIsSubmitting(true);
       let cvUploadResponse = null;
       if (applicationData.cv) {
-        cvUploadResponse = await uploadCV(applicationData.cv);
+        cvUploadResponse = await uploadCV(applicationData.cv, setUploadProgress);
+        setUploadProgress(0); 
       }
 
       const response = await createDemandes({
@@ -126,7 +127,7 @@ const OffreDispo = () => {
         name: applicationData.name,
         email: applicationData.email,
         lettreMotivation: applicationData.lettreMotivation,
-        cv: cvUploadResponse?.originalname || null,
+        cv: cvUploadResponse?.filename || null, 
       });
 
       setDemandeId(response.id);
@@ -143,8 +144,10 @@ const OffreDispo = () => {
       alert(`Erreur: ${error.message || 'Échec de la soumission'}`);
     } finally {
       setIsSubmitting(false);
+      setUploadProgress(0); 
     }
   };
+
 
   const validateForm = () => {
     if (!applicationData.name) {

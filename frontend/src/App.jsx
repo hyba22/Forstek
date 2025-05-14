@@ -15,7 +15,6 @@ import FooterPage from "./Components/Footer/FooterPage";
 import StartupProfile from "./Components/Profiles/Startup/StartupProfile";
 import StartupOffres from "./Components/Profiles/Startup/SideBarStartup/Pages/StartupOffres";
 import RendezVous from "./Components/Profiles/Startup/SideBarStartup/Pages/RendezVous";
-import Parametres from "./Components/Profiles/Startup/SideBarStartup/Pages/Parametres";
 import InvestisseurProfile from "./Components/Profiles/Investisseur/InvestisseurProfile";
 import RendezVouss from "./Components/Profiles/Investisseur/InvestisseurSidebar/Pages/Rendez-Vous";
 import ListeIdees from "./Components/Profiles/Investisseur/InvestisseurSidebar/Pages/ListeIdees";
@@ -40,8 +39,10 @@ import AjoutProjetFreelance from "./Components/Profiles/Investisseur/Investisseu
 import OffreDispo from "./Components/Profiles/Stagiaire/OffreDispo";
 import SearchBar from "./Components/Searchbar/SearchBar";
 import ProfileHeader from "./Components/Profiles/Profile header/ProfileHeader";
-
-
+import Dashbord from "../../dashboard/src/pages/Dashbord";
+import Chat from "../../chatbot/my-react-app/src/Components/Chat";
+import SuiviCondidature from "./Components/Profiles/Startup/SideBarStartup/Pages/SuiviCondidature";
+import Parametres from "./Components/Profiles/Stagiaire/Parametres";
 function App() {
 
   return (
@@ -52,7 +53,8 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="searchBar" element={<SearchBar/>} />
         <Route path="profileHeader" element={<ProfileHeader/>} />
-
+        <Route path="/dashboard" element={<Dashbord/>} />
+        <Route path="/chatbot" element={<Chat/>} />
         {/* sign up forms routes */}
         <Route path="/signup">
           <Route path="investisseur" element={<FormulaireInvestisseur />} />
@@ -69,7 +71,8 @@ function App() {
           <Route path="offres" element={<StartupOffres />} />
           <Route path="evaluation" element={< Evaluations/>} />
           <Route path="rendez-vous" element={<RendezVous />} />
-          <Route path="parametres" element={<ParametresPartenaire />} />
+          <Route path="parametres" element={<Parametres />} />
+          <Route path="suiviCondidature" element={<SuiviCondidature/>} />
           <Route index element={<div>Dashboard Content</div>} />
         </Route>
          {/* investisseur profile's routes */}
@@ -78,13 +81,13 @@ function App() {
           <Route path="evaluation" element={<Evaluations />} />
           <Route path="projetFreelance" element={<AjoutProjetFreelance />} />
           <Route path="rendezVous" element={<RendezVouss />} />
-          <Route path="parametres" element={<ParametresPartenaire />} />
+          <Route path="parametres" element={<Parametres />} />
           <Route index element={<div>Dashboard Content</div>} />
         </Route>
         {/* freelancer profile's routes */}
         <Route path="/profile/freelance" element={<FreelanceProfile/>}>
           <Route path="listeProjetsFreelance" element={<ListeProjetsFreelance />} />
-          <Route path="parametres" element={<ParametresPartenaire />} />
+          <Route path="parametres" element={<Parametres />} />
           <Route index element={<div>Dashboard Content</div>} />
         </Route>
         {/* stagiaire profile's routes */}
@@ -92,7 +95,7 @@ function App() {
           <Route index element={<AccueilStagiaire />} />
           <Route path="suivi-demande" element={<SuiviDemande />} />
           <Route path="offres-dispo" element={<OffreDispo />} /> 
-          <Route path="parametres" element={<ParametresPartenaire />} />
+          <Route path="parametres" element={<Parametres />} />
           <Route path="deconnexion" element={<Deconnexion />} />
           <Route path="rendez-vous" element={<RendezVous />} />
         </Route> 
@@ -101,7 +104,7 @@ function App() {
           <Route path="demande" element={<ListeProjet />} />
           <Route path="evaluation" element={<Evaluations />} />
           <Route path="rendez-vous" element={<RendezVousPartenaire />} />
-          <Route path="parametres" element={<ParametresPartenaire />} />
+          <Route path="parametres" element={<Parametres />} />
           <Route index element={<div>Dashboard Content</div>} />
         </Route>
         {/* porteur profile's routes */}
@@ -110,7 +113,7 @@ function App() {
           <Route path="liste-porteur" element={<ListePorteur />} />
           <Route path="liste-projet" element={<ListeProjet />} />
           <Route path="rendv" element={<RendV />} />
-          <Route path="parametres" element={<ParametresPartenaire />} />
+          <Route path="parametres" element={<Parametres />} />
         </Route>
         <Route path="liste-porteur" element={<ListePorteur />} />
       </Routes>

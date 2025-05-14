@@ -4,6 +4,7 @@ import Carousel from "react-bootstrap/Carousel";
 import Navbar from "../Navbar/Navbar";
 import SignUpModal from "../Sign up/SignUpModal";
 import LoginModal from "../Login/LoginModal";
+import Chat from "../../../../chatbot/my-react-app/src/Components/Chat";
 
 const Accueil = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -66,6 +67,7 @@ const Accueil = () => {
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>
+        <Chat/>
       </div>
       <div className={styles.body}>
         <div className={styles.leftSide}>

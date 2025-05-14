@@ -102,6 +102,7 @@
 .refuseBtn:hover {
   background-color: #c0392b;
 }
+
 .loading {
   padding: 20px;
   text-align: center;
@@ -116,17 +117,255 @@
   font-size: 1.2rem;
 }
 
+.agrandirIcon {
+  cursor: pointer;
+  text-align: center;
+}
+
+.icon {
+  font-size: 1.2rem;
+  color: #2c3e50;
+}
+
+.modalContent {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.modalHeader h2 {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+}
+
+.closeButton:hover {
+  color: #2c3e50;
+}
+
+.modalBody {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.detailRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.detailRow strong {
+  flex: 0 0 150px;
+  color: #333;
+}
+
+.detailRow span {
+  flex: 1;
+  color: #555;
+}
+
+.aiAssistant {
+  background-color: #f8fafc;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.premiumHeader h4 {
+  margin: 0 0 10px;
+  font-size: 1.2rem;
+  color: #2c3e50;
+}
+
+.aiFeatures {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.aiFeature {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+}
+
+.aiFeature input {
+  margin: 0;
+}
+
+.aiResponse {
+  background-color: white;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 5px;
+  font-size: 0.85rem;
+  color: #333;
+  border: 1px solid #e0e0e0;
+}
+
+.aiError {
+  color: #e74c3c;
+  font-size: 0.85rem;
+  margin-top: 10px;
+}
+
+.aiButton {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #3f7bd6;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s;
+}
+
+.aiButton:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+
+.descriptionSection {
+  margin-top: 20px;
+}
+
+.descriptionSection h3 {
+  font-size: 1.2rem;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.fullDescription {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+.applicationForm {
+  margin-top: 20px;
+}
+
+.applicationForm h3 {
+  font-size: 1.2rem;
+  color: #2c3e50;
+  margin-bottom: 15px;
+}
+
+.formGroup {
+  margin-bottom: 15px;
+}
+
+.formGroup label {
+  display: block;
+  font-size: 0.9rem;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.formGroup input,
+.formGroup textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.formGroup textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.fileName {
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 5px;
+  display: block;
+}
+
+.progressBar {
+  width: 100%;
+  height: 20px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: #2ecc71;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  transition: width 0.3s;
+}
+
+.submitButton {
+  padding: 10px 20px;
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s;
+}
+
+.submitButton:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+
 @media (max-width: 768px) {
   .body {
-      padding: 15px;
+    padding: 15px;
   }
   
   .modernTable {
-      display: block;
-      overflow-x: auto;
+    display: block;
+    overflow-x: auto;
   }
   
   .actionButtons {
-      flex-direction: column;
+    flex-direction: column;
+  }
+
+  .modalContent {
+    padding: 10px;
+  }
+
+  .modalHeader h2 {
+    font-size: 1.2rem;
+  }
+
+  .detailRow strong {
+    flex: 0 0 120px;
+  }
+
+  .aiButton,
+  .submitButton {
+    width: 100%;
   }
 }

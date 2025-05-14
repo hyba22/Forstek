@@ -151,7 +151,7 @@ export const updateDemande = async (id, demandeData) => {
     throw error;
   }
 };
-
+/*
 export const updateDemandeStatus = async (id, statut) => {
   try {
     const response = await axios.patch(`${API_BASE_URL}/demandes/${id}/status`, { statut });
@@ -161,8 +161,18 @@ export const updateDemandeStatus = async (id, statut) => {
     throw error;
   }
 };
-
-
+*/
+export const updateDemandeStatus = async (id, statut) => {
+  try {
+    console.log('Updating status for demande:', id, 'to:', statut); 
+    const response = await axios.patch(`${API_BASE_URL}/demandes/${id}/statut`, { statut });
+    console.log('Status update response:', response.data); 
+    return response.data;
+  } catch (error) {
+    console.error(`Error updating demande ${id} status:`, error.response?.data || error.message);
+    throw error;
+  }
+};
 
 export const deleteDemande = async (id) => {
   try {
@@ -408,11 +418,29 @@ export const uploadCV = async (cvFile) => {
 };
 */
 
-export const uploadCV = async (file) => {
+export const uploadCV = async (file, onUploadProgress) => {
   const formData = new FormData();
   formData.append('cv', file);
-  const response = await axios.post('http://localhost:3000/api/upload-cv', formData);
-  return response.data;
+
+  try {
+    const response = await axios.post(`${API_BASE_URL}/demandes/upload-cv`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      onUploadProgress: (progressEvent) => {
+        if (onUploadProgress) {
+          const percentCompleted = Math.round(
+            (progressEvent.loaded * 100) / progressEvent.total
+          );
+          onUploadProgress(percentCompleted);
+        }
+      },
+    });
+    return response.data;
+  } catch (error) {
+    const errorMessage = error.response?.data?.message || error.message || 'Erreur lors du téléchargement du CV';
+    throw new Error(errorMessage);
+  }
 };
 
 export const getOfferDetails = async (offerId) => {
@@ -501,6 +529,23 @@ export const getDemandesWithOffers = async () => {
     throw new Error(error.message || 'Failed to fetch applications');
   }
 };*/
+
+export const createDemandeProjet = async () => {
+
+}
+
+export const getAllDemandes = async () => {
+  try {
+    console.log('Fetching from:', `${API_BASE_URL}/demandes/fetch-with-offers`); 
+    const response = await axios.get(`${API_BASE_URL}/demandes/fetch-with-offers`);
+    console.log('API response:', response.data); // Debug log
+    return Array.isArray(response.data) ? response.data : [];
+  } catch (error) {
+    console.error('Erreur lors de la récupération des demandes:', error.response?.data || error.message);
+    throw error;
+  }
+};
+
 
 export const getDemandesWithOffers = async () => {
   try {

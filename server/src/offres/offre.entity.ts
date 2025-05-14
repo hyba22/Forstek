@@ -16,7 +16,7 @@ export class Offre {
   description: string;
 
   @Column({ nullable: false })
-  localisation: string;
+  localisation: string; 
 
   @Column({ nullable: true })
   salaire?: string;
